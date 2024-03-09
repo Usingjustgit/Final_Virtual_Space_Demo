@@ -28,7 +28,7 @@ export class User {
   @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Movies' }])
   likedMovies: string[];
 
-  @Prop({ type: Boolean, default: true })
+  @Prop({ type: Boolean, default: false })
   isAdmin: boolean;
 
   @Prop({ type: String })
