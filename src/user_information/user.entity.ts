@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 import validator from 'validator';
 
 export type UserDocument = User & Document;
@@ -23,6 +24,9 @@ export class User {
 
   @Prop({ type: String })
   image: string;
+
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Movies' }])
+  likedMovies: string[];
 
   @Prop({ type: Boolean, default: true })
   isAdmin: boolean;
