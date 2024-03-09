@@ -16,7 +16,7 @@ export class RoleGaurd implements CanActivate {
     const req: any = ctx.getRequest<Request>();
 
     if (!req.user.isAdmin) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException("You don't have permission");
     }
     return true;
   }

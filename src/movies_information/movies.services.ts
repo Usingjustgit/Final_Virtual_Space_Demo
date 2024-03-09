@@ -85,4 +85,50 @@ export class MoviesServices {
       throw new NotFoundException(error);
     }
   }
+
+  async searchMovie(user_query: any): Promise<any> {
+    try {
+      const {
+        movie_catagory,
+        movie_title,
+        movie_language,
+        movie_rating,
+        movie_year,
+        search,
+      } = user_query;
+      const limit = user_query.limit || 3; // This limit variable is used for pagination to view given limit movies
+      const skip = (user_query.page - 1 || 1) * limit; // This skip variable is used for pagination to view given skip movies
+      const findQuery = {
+        ...(movie_catagory && {
+          movie_catagory: `[a-zA-Z0-9@#!.<> ]?${movie_catagory}[a-zA-Z0-9@#!.<> ]?`,
+        }),
+        ...(movie_title && {
+          movie_title: `[a-zA-Z0-9@#!.<> ]?${movie_title}[a-zA-Z0-9@#!.<> ]?`,
+        }),
+        ...(movie_language && {
+          movie_language: `[a-zA-Z0-9@#!.<> ]?${movie_language}[a-zA-Z0-9@#!.<> ]?`,
+        }),
+        ...(movie_rating && { movie_rating }),
+        ...(movie_year && { movie_year }),
+        ...(search && {
+          movie_title: {
+            $regex: `[a-zA-Z0-9@#!.<> ]?${search}[a-zA-Z0-9@#!.<> ]?`,
+            $options: 'i',
+          },
+        }),
+      }; // This query is used for search to which parameter to search in the given movies database
+      let movies = await this.moviesModel
+        .find(findQuery)
+        .skip(skip)
+        .limit(limit); // This method is used to find the movies based on the query
+      if (!movies.length) {
+        movies = await this.moviesModel.aggregate([
+          { $sample: { size: limit } },
+        ]);
+      }
+      return movies;
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
+  }
 }

@@ -4,12 +4,9 @@ import validator from 'validator';
 
 export type UserDocument = User & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class User {
-  @Prop({
-    type: String,
-    required: [true, 'Name is required'],
-  })
+  @Prop({ type: String, required: [true, 'Name is required'] })
   fullName: string;
 
   @Prop({
@@ -36,9 +33,6 @@ export class User {
 
   @Prop({ type: String })
   token: string;
-
-  @Prop({ type: String, default: new Date().toISOString() })
-  createdAt: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

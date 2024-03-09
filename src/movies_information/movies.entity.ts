@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 export type MoviesDocument = Movies & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Movies {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   user_id: string;
@@ -35,17 +35,17 @@ export class Movies {
   @Prop({ type: String, required: [true, 'movie_video_url is required'] })
   movie_video_url: string;
 
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Casts' }])
+  movie_casts: string;
+
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }])
+  movie_reviews: string;
+
+  @Prop({ type: Number, default: 0 })
+  movie_number_of_reviews: number;
+
   @Prop({ type: Number, default: 0 })
   movie_rating: number;
-
-  @Prop({ type: Number, default: 0 })
-  movie_reviews: number;
-
-  @Prop({ type: String, default: Date.now })
-  created_at: Date;
-
-  @Prop({ type: String, default: Date.now })
-  updated_at: Date;
 }
 
 export const moviesSchema = SchemaFactory.createForClass(Movies);

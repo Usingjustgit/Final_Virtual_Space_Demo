@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   Request,
   UseFilters,
   UseGuards,
@@ -19,7 +20,7 @@ export class MoviesController {
   constructor(private readonly moviesService: MoviesServices) {}
 
   //This router return all movies
-  @Get()
+  @Get('/')
   async getAllMovies(): Promise<any> {
     return await this.moviesService.getAllMovies();
   }
@@ -43,5 +44,10 @@ export class MoviesController {
     @Param('movie_id') movie_id: string,
   ): Promise<any> {
     return await this.moviesService.deleteMovie(req.user.id, movie_id); // This is called into the movies servies
+  }
+
+  @Get('/search')
+  async searchMovie(@Query() query): Promise<any> {
+    return await this.moviesService.searchMovie(query);
   }
 }
