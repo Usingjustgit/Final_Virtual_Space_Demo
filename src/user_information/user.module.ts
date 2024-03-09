@@ -5,6 +5,7 @@ import { User, UserSchema } from './user.entity';
 import { AuthModule } from 'src/authentication/auth.module';
 import { UserController } from './user.controller';
 import { MoviesModule } from 'src/movies_information/movies.module';
+import { AdminController } from './admin.controller';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { MoviesModule } from 'src/movies_information/movies.module';
     forwardRef(() => AuthModule),
     forwardRef(() => MoviesModule),
   ],
-  controllers: [UserController],
+  controllers: [AdminController, UserController],
   providers: [UserService],
   exports: [UserService],
 })

@@ -16,6 +16,17 @@ export class UserService {
     private readonly authService: AuthService,
   ) {}
 
+  /* ============================ Internal Use Controllers ============================ */
+
+  // This method return all user by email
+  async findUserByEmail(email: string): Promise<any> {
+    try {
+      return await this.userModel.findOne({ email }); // Find user by email into the database
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
+  }
+
   /* ============================ Normal User Controllers ============================ */
 
   // This method is take a user object and create a new user in the database
@@ -44,28 +55,6 @@ export class UserService {
       return token;
     } catch (error) {
       throw new BadRequestException(error);
-    }
-  }
-
-  // This method return all users from the database
-  // This method end point is .....
-  // @Get("/api/user")
-  async findAll(): Promise<User[]> {
-    try {
-      return this.userModel.find().exec(); // This method return all users from the database
-    } catch (error) {
-      throw new NotFoundException(error);
-    }
-  }
-
-  // This method return a user based on id
-  // This method end point is .....
-  // @Get("/api/user/:id")
-  async findOne(email: string): Promise<User> {
-    try {
-      return this.userModel.findOne({ email }).exec(); // This method is used to find a user based on email
-    } catch (error) {
-      throw new NotFoundException(error);
     }
   }
 
@@ -172,6 +161,17 @@ export class UserService {
   }
 
   /* ======================= Admin Controller ======================= */
+
+  // This method return a user based on id
+  // This method end point is .....
+  // @Get("/api/user/:id")
+  async findOne(email: string): Promise<User> {
+    try {
+      return this.userModel.findOne({ email }).exec(); // This method is used to find a user based on email
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
+  }
 
   // This method return all users
   // Also this method is only for admin so this method is not access for normal user
