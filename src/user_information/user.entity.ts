@@ -7,8 +7,6 @@ export type UserDocument = User & Document;
 export class User {
   @Prop({
     type: String,
-    match:
-      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
     required: [true, 'Name is required'],
   })
   fullName: string;
