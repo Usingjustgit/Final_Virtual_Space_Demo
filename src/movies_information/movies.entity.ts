@@ -40,6 +40,12 @@ export class Movies {
 
   @Prop({ type: Number, default: 0 })
   movie_reviews: number;
+
+  @Prop({ type: String, default: Date.now })
+  created_at: Date;
+
+  @Prop({ type: String, default: Date.now })
+  updated_at: Date;
 }
 
 export const moviesSchema = SchemaFactory.createForClass(Movies);

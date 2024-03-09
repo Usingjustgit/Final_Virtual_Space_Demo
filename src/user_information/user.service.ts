@@ -23,7 +23,7 @@ export class UserService {
     try {
       return await this.userModel.findOne({ email }); // Find user by email into the database
     } catch (error) {
-      throw new NotFoundException(error);
+      throw new NotFoundException('user not found');
     }
   }
 
@@ -39,7 +39,7 @@ export class UserService {
       user.password = await bcrypt.hash(user.password, 10); // Hash the password using bcryptjs library
       const createdUser = new this.userModel(user); // Create a new user object with the hashed password
       await createdUser.save(); // Save the user in the database
-      return createdUser; // Return the created user without the password
+      return { status: 201, massage: 'User created successfully' }; // Return the created user without the password
     } catch (err) {
       throw new BadRequestException(err);
     }
@@ -73,7 +73,11 @@ export class UserService {
   // @Delete("/api/user/:id")
   async deleteUser(id: string): Promise<any> {
     try {
-      return this.userModel.findByIdAndDelete({ _id: id }); // This method is used to delete a user based on id
+      if (!(await this.userModel.findById(id))) {
+        throw new NotFoundException('user not found');
+      } // if user not found then throw the error
+      await this.userModel.findByIdAndDelete({ _id: id });
+      return 'User deleted successfully'; // This method is used to delete a user based on id
     } catch (error) {
       throw new NotFoundException(error);
     }

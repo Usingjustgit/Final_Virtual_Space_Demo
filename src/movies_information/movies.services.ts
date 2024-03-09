@@ -51,6 +51,27 @@ export class MoviesServices {
     }
   }
 
+  // This method return a movie based on id
+  // This method return the string else error
+  // This method end point is ....
+  // @Get("/api/movies/:id")
+  async updateMovie(movie_id: string) {
+    try {
+      const movie = await this.userService.findOne(movie_id);
+      if (!movie) {
+        throw new NotFoundException('movie not found');
+      } // if movie not found then throw the error
+      await this.moviesModel.findByIdAndUpdate(movie_id, movie); //update movie if found
+      return { status: 200, message: 'movie updated successfully' };
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
+  }
+
+  // This method delete a movie based on id
+  // In this movie id get from it token so user must need to login to delete it
+  // This method end point is ....
+  // @Delete("/api/movies/:id")
   async deleteMovie(email: string, movie_id: string): Promise<any> {
     try {
       const currentUser = await this.userService.findUserByEmail(email);
