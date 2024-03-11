@@ -35,7 +35,7 @@ export class Movies {
   @Prop({ type: String, required: [true, 'movie_video_url is required'] })
   movie_video_url: string;
 
-  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Casts' }])
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Cast' }])
   movie_casts: string;
 
   @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }])

@@ -3,10 +3,13 @@ import mongoose from 'mongoose';
 
 export type ReviewsDocument = Reviews & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Reviews {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   user_id: string;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Movies' })
+  movie_id: string;
 
   @Prop({ type: String, required: [true, 'user name is required'] })
   user_name: string;
