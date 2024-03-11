@@ -1,1 +1,1 @@
-export const movies = [{}];
+export const movies = [];

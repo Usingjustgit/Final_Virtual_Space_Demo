@@ -128,20 +128,25 @@ export class MoviesServices {
         movie.movie_number_of_reviews = movie.movie_reviews.length;
 
         // Calculate the average rating of the movies based on the number of reviews
-        movie.movie_rating =
-          (movie.movie_reviews as any).reduce(
-            (sum, review) => review.movie_rating + sum,
-            0,
-          ) / movie.movie_reviews.length;
+        const totalRating = ((movie.movie_reviews + 1) as any).reduce(
+          (sum, review) =>
+            review.movie_rating === undefined
+              ? sum + create_review.movie_rating
+              : sum + review.movie_rating,
+          0,
+        );
+        movie.movie_rating = totalRating / movie.movie_reviews.length;
 
         // update the movie
         await this.moviesModel.updateOne({ _id: movie_id }, movie);
 
         // send the response
         return 'Your review is added successfully.';
+      } else {
+        throw new NotFoundException('Movie Not Found');
       }
     } catch (error) {
-      throw new BadRequestException(error);
+      return error;
     }
   }
 
