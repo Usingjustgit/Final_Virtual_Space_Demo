@@ -43,4 +43,12 @@ export class ReviewsService {
       throw new InternalServerErrorException(error);
     }
   }
+
+  async deleteReviewById(id: string): Promise<any> {
+    try {
+      return await this.reviewModel.findByIdAndDelete({ _id: id });
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
+  }
 }

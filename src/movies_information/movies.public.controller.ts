@@ -1,20 +1,15 @@
 import {
   BadRequestException,
-  Body,
   Controller,
   Get,
   InternalServerErrorException,
   Param,
-  Post,
   Query,
-  Request,
   UseFilters,
-  UseGuards,
 } from '@nestjs/common';
 import { MoviesServices } from './movies.services';
 import { movies } from './dummy.Movies';
 import { CustomException } from 'src/exceptions/custom.exception';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('/api/movies')
 @UseFilters(CustomException)
@@ -36,19 +31,25 @@ export class MoviesPublicController {
     }
   }
 
+  //This router return all movies
+  // And return the result of all movies
   @Get('/all')
   async getAllMovies(@Query() query): Promise<any> {
-    // return await this.moviesService.getAllMovies();
-    return await this.moviesService.searchMovie(query);
+    return await this.moviesService.getAllMovies();
   }
 
+  //This router return a movie based on id
+  // This router take a parameter id
   @Get('/:id')
   async getMovieById(@Param('id') movie_id: string): Promise<any> {
     return await this.moviesService.getMovieById(movie_id);
   }
 
+  //This router return all movies based on query
+  // This router take a query parameter
+  // And return the result of movies
   @Get('/serch')
-  async serchMovies(): Promise<any> {
-    return 'This Method is called...';
+  async serchMovie(@Query() query): Promise<any> {
+    return await this.moviesService.searchMovie(query);
   }
 }

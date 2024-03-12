@@ -7,7 +7,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { UserService } from 'src/user_information/user.service';
 import { ReviewsService } from './reviews/reviews.service';
 
 @Injectable()
@@ -19,6 +18,10 @@ export class MoviesServices {
   ) {}
 
   // ============================ PUBLIC API ============================
+
+  // This method used to add some movies
+  // This method end point is ....
+  // @Post('/api/movies')
   async addSomeMovies(movies: any): Promise<any> {
     try {
       return this.moviesModel.insertMany(movies);
@@ -27,6 +30,10 @@ export class MoviesServices {
     }
   }
 
+  // This method used to get all movies
+  // In this method we will use the mongoose inbuilt method find through get all movies
+  // This method end point is ....
+  // @Get('/api/movies')
   async getAllMovies(): Promise<any> {
     try {
       return await this.moviesModel.aggregate([{ $sample: { size: 100 } }]);
@@ -35,6 +42,11 @@ export class MoviesServices {
     }
   }
 
+  // This method used to get a movie based on id
+  // This method into the database inbuilt mehtod findById through get movie
+  // This method is take a movie id as parameter
+  // This method end point is ....
+  // @Get('/api/movie/:id')
   async getMovieById(movie_id: string): Promise<any> {
     try {
       return await this.moviesModel.findById(movie_id);
@@ -43,6 +55,10 @@ export class MoviesServices {
     }
   }
 
+  // This method used to search movie
+  // This method take a query object and pass as parameter on find based on query
+  // This method end point is .....
+  // @Get('/api/user/search')
   async searchMovie(query: any): Promise<any> {
     try {
       console.log(query);
@@ -97,6 +113,11 @@ export class MoviesServices {
   }
 
   // ============================ PRIVATE API ============================
+
+  // This method is used to create the review of movie
+  // This method take a three parameter user, movie_id and user_reviews
+  // This method end point is .....,
+  // @Post('/api/user/reviews')
   async createReviews(user: any, movie_id: string, user_reviews: any) {
     try {
       // First We check is the user selected movie is present or not
@@ -152,121 +173,76 @@ export class MoviesServices {
 
   // ============================ ADMIN API ============================
 
-  // // This method return all movies
-  // // This method find all movies availabe on the our database
-  // // This method end point is ....
-  // // @Get("/api/movies")
-  // async getAllMovies(): Promise<any> {
-  //   try {
-  //     return await this.moviesModel.find();
-  //   } catch (error) {
-  //     throw new NotFoundException(error);
-  //   }
-  // }
+  // This method used to create a movie
+  // This method end point is ....
+  // @Post('/api/admin/movies')
+  async createMovie(user_id: String, movie: Movies): Promise<any> {
+    try {
+      const isMoviesExist = await this.moviesModel
+        .findOne({
+          movie_title: movie.movie_title,
+        })
+        .exec();
+      if (isMoviesExist) {
+        throw new BadRequestException('Movie Already Exist');
+      }
+      const createMovie = new this.moviesModel({ movie, ...user_id });
+      return await createMovie.save();
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
+  }
 
-  // // This method create a new movie in the database
-  // // return the string if movie is created successfully else throw the error
-  // // This method end point is .....
-  // // @Post("/api/movies")
-  // async createMovie(user_id: String, movie: Movies): Promise<any> {
-  //   try {
-  //     const isMoviesExist = await this.moviesModel.findOne({
-  //       movie_title: movie.movie_title,
-  //     });
-  //     if (isMoviesExist) {
-  //       throw new BadRequestException('Movie Already Exist');
-  //     }
-  //     const movieCreated = new this.moviesModel({
-  //       ...movie,
-  //       user_id,
-  //     });
-  //     await movieCreated.save();
-  //     return { status: 201, message: 'movie created successfully' };
-  //   } catch (error) {
-  //     throw new NotFoundException(error);
-  //   }
-  // }
+  // This method used to update a movie
+  // This method end point is ....
+  // @Put('/api/admin/movies/:id')
+  async updateMovie(id: string, movie_id: string, data: any): Promise<any> {
+    try {
+      const isMovieExist = await this.moviesModel.findById(movie_id);
+      if (!isMovieExist) {
+        throw new Error('Movie Not Found');
+      }
+      return await this.moviesModel.findByIdAndUpdate({ _id: movie_id }, data);
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
+  }
 
-  // // This method return a movie based on id
-  // // This method return the string else error
-  // // This method end point is ....
-  // // @Get("/api/movies/:id")
-  // async updateMovie(movie_id: string) {
-  //   try {
-  //     const movie = await this.userService.findOne(movie_id);
-  //     if (!movie) {
-  //       throw new NotFoundException('movie not found');
-  //     } // if movie not found then throw the error
-  //     await this.moviesModel.findByIdAndUpdate(movie_id, movie); //update movie if found
-  //     return { status: 200, message: 'movie updated successfully' };
-  //   } catch (error) {
-  //     throw new NotFoundException(error);
-  //   }
-  // }
+  // This method used to delete a movie based on id
+  // This method end point is ....
+  // @Delete('/api/admin/movies/:id')
+  async deleteMovieById(id: string): Promise<any> {
+    try {
+      const isMovieExist = await this.moviesModel.findById(id);
+      if (!isMovieExist) {
+        throw new Error('Movie Not Found');
+      }
+      (isMovieExist.movie_reviews as any).map(async (review) => {
+        await this.reviewService.deleteReviewById(review._id);
+      });
+      return await this.moviesModel.findByIdAndDelete({ _id: id });
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
+  }
 
-  // // This method delete a movie based on id
-  // // In this movie id get from it token so user must need to login to delete it
-  // // This method end point is ....
-  // // @Delete("/api/movies/:id")
-  // async deleteMovie(email: string, movie_id: string): Promise<any> {
-  //   try {
-  //     const currentUser = await this.userService.findUserByEmail(email);
-  //     const movie = await this.userService.findOne(movie_id);
-  //     if (!movie) {
-  //       throw new NotFoundException('movie not found');
-  //     }
-  //     await this.moviesModel.findByIdAndDelete(movie_id);
-  //     return { status: 200, message: 'movie deleted successfully' };
-  //   } catch (error) {
-  //     throw new NotFoundException(error);
-  //   }
-  // }
-
-  // async searchMovie(user_query: any): Promise<any> {
-  //   try {
-  //     const {
-  //       movie_catagory,
-  //       movie_title,
-  //       movie_language,
-  //       movie_rating,
-  //       movie_year,
-  //       search,
-  //     } = user_query;
-  //     const limit = user_query.limit || 3; // This limit variable is used for pagination to view given limit movies
-  //     const skip = (user_query.page - 1 || 1) * limit; // This skip variable is used for pagination to view given skip movies
-  //     const findQuery = {
-  //       ...(movie_catagory && {
-  //         movie_catagory: `[a-zA-Z0-9@#!.<> ]?${movie_catagory}[a-zA-Z0-9@#!.<> ]?`,
-  //       }),
-  //       ...(movie_title && {
-  //         movie_title: `[a-zA-Z0-9@#!.<> ]?${movie_title}[a-zA-Z0-9@#!.<> ]?`,
-  //       }),
-  //       ...(movie_language && {
-  //         movie_language: `[a-zA-Z0-9@#!.<> ]?${movie_language}[a-zA-Z0-9@#!.<> ]?`,
-  //       }),
-  //       ...(movie_rating && { movie_rating }),
-  //       ...(movie_year && { movie_year }),
-  //       ...(search && {
-  //         movie_title: {
-  //           $regex: `[a-zA-Z0-9@#!.<> ]?${search}[a-zA-Z0-9@#!.<> ]?`,
-  //           $options: 'i',
-  //         },
-  //       }),
-  //     }; // This query is used for search to which parameter to search in the given movies database
-  //     let movies = await this.moviesModel
-  //       .find(findQuery)
-  //       .skip(skip)
-  //       .limit(limit); // This method is used to find the movies based on the query
-  //     if (!movies.length) {
-  //       movies = await this.moviesModel.aggregate([
-  //         { $sample: { size: limit } },
-  //       ]);
-  //     }
-  //     return movies;
-  //   } catch (error) {
-  //     throw new NotFoundException(error);
-  //   }
-  // }
-
-  // async createReview(email: string, movie_id: string): Promise<any> {}
+  // This is method used to delete all movies
+  // This method call the deleteMovieById method as internally.
+  // This method end point is .....
+  // @Delete('/api/admin/movies')
+  async deleteAllMovies(): Promise<any> {
+    try {
+      const allMovies = await this.moviesModel.find();
+      if (!allMovies.length) {
+        throw new Error('No Movies Found');
+      }
+      const deleteAllMovies: Promise<boolean> | Promise<any>[] = await (
+        await Promise.all(allMovies as any)
+      ).map(async (movie) => await this.deleteMovieById(movie));
+      if (deleteAllMovies.length) throw new Error('No Movies Deleted.');
+      return { success: true, message: 'All Movies Deleted' };
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
 }
