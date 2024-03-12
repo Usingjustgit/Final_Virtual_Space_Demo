@@ -24,14 +24,19 @@ export class CategoryController {
   // This router return all category
   @Get('/')
   async getAllCategory() {
-    return await this.categoryService.getAllCategory();
+    const data = await this.categoryService.getAllCategory();
+    return {
+      catagory: data,
+      status: 'success',
+      total_category: data.length,
+    };
   }
 
   // This router return a category based on id
   // This router take id from url
   @Get('/:id')
-  async getCategoryById(id: string) {
-    return await this.categoryService.getCategoryById(id);
+  async getCategoryById(@Param('id') category_id: string): Promise<any> {
+    return await this.categoryService.getCategoryById(category_id);
   }
 
   //========================= ADMIN CONTROLLER ===========================

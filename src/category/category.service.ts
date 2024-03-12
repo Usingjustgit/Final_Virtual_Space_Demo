@@ -32,7 +32,11 @@ export class CategoryService {
   // @Get('/api/category/:id')
   async getCategoryById(id: string): Promise<any> {
     try {
-      return await this.categoryModel.findById(id).exec();
+      const category = await this.categoryModel.findById(id).exec();
+      if (!category) {
+        throw new Error('Not Found');
+      }
+      return category;
     } catch (error) {
       throw new NotFoundException(error);
     }
@@ -67,7 +71,13 @@ export class CategoryService {
   // @Delete('/api/admin/category/:id')
   async deleteCategory(id: string): Promise<any> {
     try {
-      return await this.categoryModel.findByIdAndDelete({ _id: id });
+      const isCategoryExist = await this.categoryModel.findByIdAndDelete({
+        _id: id,
+      });
+      if (!isCategoryExist) {
+        throw new Error('Category Not Found');
+      }
+      return 'Category deleted successfully';
     } catch (error) {
       throw new NotFoundException(error);
     }
