@@ -1,16 +1,16 @@
 import {
   BadRequestException,
-  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
 import { Category, CategoryDocument } from './category.entity';
 import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class CategoryService {
   constructor(
-    @Inject(Category.name)
+    @InjectModel(Category.name)
     private readonly categoryModel: Model<CategoryDocument>,
   ) {}
 

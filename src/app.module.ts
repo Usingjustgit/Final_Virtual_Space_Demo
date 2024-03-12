@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './authentication/auth.module';
 import { UserModule } from './user_information/user.module';
 import { MoviesModule } from './movies_information/movies.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { MoviesModule } from './movies_information/movies.module';
     }),
     AuthModule,
     MoviesModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
