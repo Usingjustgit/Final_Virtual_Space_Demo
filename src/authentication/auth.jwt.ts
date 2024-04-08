@@ -13,6 +13,6 @@ export class JwtStratergy extends PassportStrategy(Strategy) {
   }
 
   validate(payload: any): any {
-    return payload._doc;
+    return payload;
   }
 }

@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConsoleLogger,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -8,12 +9,15 @@ import { User, UserDocument } from './user.entity';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { AuthService } from 'src/authentication/auth.service';
+import { Passwords } from './user.controller';
+import { MoviesServices } from 'src/movies_information/movies.services';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
     private readonly authService: AuthService,
+    private readonly moviesService: MoviesServices,
   ) {}
 
   /* ============================ Internal Use Controllers ============================ */
@@ -37,9 +41,18 @@ export class UserService {
   async create(user: User): Promise<any> {
     try {
       user.password = await bcrypt.hash(user.password, 10); // Hash the password using bcryptjs library
-      const createdUser = new this.userModel(user); // Create a new user object with the hashed password
+      const token = await this.authService.generateToken(user);
+      const createdUser = new this.userModel({ ...user, token }); // Create a new user object with the hashed password
       await createdUser.save(); // Save the user in the database
-      return { status: 201, massage: 'User created successfully' }; // Return the created user without the password
+
+      return {
+        fullName: user.fullName,
+        email: user.email,
+        image: user.image,
+        likedMovies: user.likedMovies,
+        isAdmin: user.isAdmin,
+        token,
+      }; // Return the created user without the password
     } catch (err) {
       throw new BadRequestException(err);
     }
@@ -52,7 +65,8 @@ export class UserService {
   async login(user: User): Promise<any> {
     try {
       const token = await this.authService.generateToken(user); // This method is used to generate token from authService class
-      return token;
+      await this.userModel.updateOne({ email: user.email }, { token });
+      return { ...user, token };
     } catch (error) {
       throw new BadRequestException(error);
     }
@@ -87,16 +101,12 @@ export class UserService {
   // In this user id get from it token so user must need to login to change password
   // return the updated user
   // This method end point is .....
-  // @Put("/api/user/change-password/:id")
-  async changePassword(
-    id: string,
-    oldPassword: string,
-    password: string,
-  ): Promise<any> {
+  // @Put("/api/user/change-password/")
+  async changePassword(id: string, passwords: Passwords): Promise<any> {
     try {
       if (
         !(await bcrypt.compare(
-          oldPassword,
+          passwords.oldPassword,
           (await this.userModel.findById(id)).password,
         ))
       ) {
@@ -104,7 +114,7 @@ export class UserService {
       } // Check if old password is correct or not if not correct then throw the error.
       return this.userModel.findByIdAndUpdate(
         { _id: id },
-        { password: await bcrypt.hash(password, 10) },
+        { password: await bcrypt.hash(passwords.newPassword, 10) },
         { new: true },
       ); // If OldPassword is correct then update the new password with hash password
     } catch (error) {
@@ -118,7 +128,10 @@ export class UserService {
   // @Get("/api/user/liked-movies/:id")
   async getAllLikedMovies(id: string): Promise<any> {
     try {
-      return (await this.userModel.findById(id)).likedMovies; // This method is used to get all liked movies
+      const user = await this.userModel.findById(id);
+      return user.likedMovies.map(async (movieId) => {
+        return await this.moviesService.getMovieById(movieId);
+      });
     } catch (error) {
       throw new NotFoundException(error);
     }
@@ -159,6 +172,22 @@ export class UserService {
         { $pull: { likedMovies: movieId } },
         { new: true },
       ); // if the movie is liked then remove it from the liked movies
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
+  }
+
+  // This method delete all liked movies
+  // This method end point is .....
+  // @Delete("/api/user/delete-all-liked-movies/:id")
+  async deleteAllLikedMovies(id: string): Promise<any> {
+    try {
+      const user = await this.userModel.findById(id);
+      return await this.userModel.findByIdAndUpdate(
+        { _id: id },
+        { likedMovies: [] },
+        { new: true },
+      );
     } catch (error) {
       throw new NotFoundException(error);
     }
