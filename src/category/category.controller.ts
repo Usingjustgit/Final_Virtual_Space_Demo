@@ -12,9 +12,10 @@ import {
 import { CategoryService } from './category.service';
 import { CustomException } from 'src/exceptions/custom.exception';
 import { AuthGuard } from '@nestjs/passport';
-import { RoleGaurd } from 'src/authentication/auth.rolegaurd';
+import { RoleGuard } from 'src/authentication/auth.rolegaurd';
+import { TypeOfCategory } from 'type';
 
-@Controller('/api/category')
+@Controller('/api/categories')
 @UseFilters(CustomException)
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
@@ -25,17 +26,15 @@ export class CategoryController {
   @Get('/')
   async getAllCategory() {
     const data = await this.categoryService.getAllCategory();
-    return {
-      catagory: data,
-      status: 'success',
-      total_category: data.length,
-    };
+    return data;
   }
 
   // This router return a category based on id
   // This router take id from url
   @Get('/:id')
-  async getCategoryById(@Param('id') category_id: string): Promise<any> {
+  async getCategoryById(
+    @Param('id') category_id: string,
+  ): Promise<TypeOfCategory> {
     return await this.categoryService.getCategoryById(category_id);
   }
 
@@ -45,8 +44,8 @@ export class CategoryController {
   // This router take data from body as title
   // And return the created category or string
   @Post('/')
-  @UseGuards(AuthGuard('jwt'), new RoleGaurd())
-  async createCategory(@Body() data: any) {
+  @UseGuards(AuthGuard('jwt'), RoleGuard)
+  async createCategory(@Body() data: TypeOfCategory) {
     return await this.categoryService.createCategory(data);
   }
 
@@ -54,16 +53,16 @@ export class CategoryController {
   // This router take id from url
   // And return the updated category or string
   @Put('/:id')
-  @UseGuards(AuthGuard('jwt'), new RoleGaurd())
-  async updateCategory(@Param('id') id: string, @Body() data: any) {
-    return await this.categoryService.updateCategory(id, data);
+  @UseGuards(AuthGuard('jwt'), RoleGuard)
+  async updateCategory(@Param('id') id: string, @Body() title: object) {
+    return await this.categoryService.updateCategory(id, title);
   }
 
   // This router is for delete category
   // This router take id from url
   // And return the deleted category or string
   @Delete('/:id')
-  @UseGuards(AuthGuard('jwt'), new RoleGaurd())
+  @UseGuards(AuthGuard('jwt'), RoleGuard)
   async deleteCategory(@Param('id') id: string) {
     return await this.categoryService.deleteCategory(id);
   }
@@ -71,7 +70,7 @@ export class CategoryController {
   // This router is for delete all category
   // And return the string if delete successfull else error
   @Delete('/')
-  @UseGuards(AuthGuard('jwt'), new RoleGaurd())
+  @UseGuards(AuthGuard('jwt'), RoleGuard)
   async deleteAllCategory() {
     return await this.categoryService.deleteAllCategory();
   }

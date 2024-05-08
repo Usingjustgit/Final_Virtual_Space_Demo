@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
-import validator from 'validator';
+import mongoose, { Document } from 'mongoose'; // Import Document type
+import validator from 'validator'; // Import validator module for validating some fields
 
+// Define the types for user entity and document
 export type UserDocument = User & Document;
 
 @Schema({ timestamps: true })
@@ -19,17 +20,27 @@ export class User {
   @Prop({ type: String, required: [true, 'Password is required'] })
   password: string;
 
-  @Prop({ type: String })
+  @Prop({ type: String, default: '' })
   image: string;
 
   @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Movies' }])
-  likedMovies: string[];
+  likedMovies: string[]; // Array of movie IDs
 
   @Prop({ type: Boolean, default: false })
   isAdmin: boolean;
 
-  @Prop({ type: String })
-  timestamp: string;
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Subscription',
+    default: null,
+  })
+  subscriptions: string; // Subscription ID
+
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Videos' }])
+  videos: string[]; // Array of video IDs
+
+  @Prop({ type: Date, default: Date.now }) // Change the type to Date for timestamps
+  timestamp: Date;
 
   @Prop({ type: String })
   token: string;

@@ -1,55 +1,50 @@
-import {
-  BadRequestException,
-  Controller,
-  Get,
-  InternalServerErrorException,
-  Param,
-  Query,
-  UseFilters,
-} from '@nestjs/common';
+import { Controller, Get, Param, Query, UseFilters } from '@nestjs/common';
 import { MoviesServices } from './movies.services';
-import { movies } from './dummy.Movies';
 import { CustomException } from 'src/exceptions/custom.exception';
+import { TypeOfMovies, TypeOfQuery, TypeOfReturnQuery } from 'type';
 
 @Controller('/api/movies')
 @UseFilters(CustomException)
 export class MoviesPublicController {
   constructor(private readonly moviesService: MoviesServices) {}
 
-  //This router return string if all movies are added into the database
-  // Also It's take as parameter in a array of a movie object
-  @Get('/')
-  async addSomeMovies() {
-    try {
-      const isAdded = await this.moviesService.addSomeMovies(movies);
-      if (!isAdded) {
-        throw new BadRequestException('Failed to add some movies');
-      }
-      return 'Movies added successfully';
-    } catch (error) {
-      throw new InternalServerErrorException(error);
-    }
-  }
-
-  //This router return all movies
-  // And return the result of all movies
-  @Get('/all')
-  async getAllMovies(@Query() query): Promise<any> {
+  /**
+   * This URL is used to get all movies
+   * @returns Promise<TypeOfMovies[]> This is an array of movies
+   */
+  @Get('/random')
+  async getAllMovies(): Promise<TypeOfMovies[]> {
     return await this.moviesService.getAllMovies();
   }
 
-  //This router return a movie based on id
-  // This router take a parameter id
+  /**
+   * This URL is used to get top movies
+   * @returns Promise<TypeOfMovies[]> This is an array of top rated movies
+   */
+  @Get('/sorted/top')
+  async getTopMovies(): Promise<TypeOfMovies[]> {
+    return await this.moviesService.getTopMovies();
+  }
+
+  /**
+   * This URL is used to get single movie
+   * @param movie_id This is movie id take as parameter to find movie
+   * @returns Promise<TypeOfMovies> This is an single movie to finding on to the database
+   */
   @Get('/:id')
-  async getMovieById(@Param('id') movie_id: string): Promise<any> {
+  async getMovieById(@Param('id') movie_id: string): Promise<TypeOfMovies> {
     return await this.moviesService.getMovieById(movie_id);
   }
 
-  //This router return all movies based on query
-  // This router take a query parameter
-  // And return the result of movies
-  @Get('/serch')
-  async serchMovie(@Query() query): Promise<any> {
+  /**
+   * This URL is used to search movie from the database
+   * @param query This is query object in different movie field to find movie base on the parameters
+   * @returns Promise<TypeOfReturnQuery> This is an array of movies based on query to finding on to the database
+   */
+  @Get('/selected/movies')
+  async serchMovieByQuery(
+    @Query() query: TypeOfQuery,
+  ): Promise<TypeOfReturnQuery> {
     return await this.moviesService.searchMovie(query);
   }
 }

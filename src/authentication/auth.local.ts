@@ -7,24 +7,40 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { LocalUserValidation } from 'type';
 
 @Injectable()
-export class AuthLocalStratergy extends PassportStrategy(Strategy) {
+export class AuthLocalStrategy extends PassportStrategy(Strategy) {
   constructor(private userService: UserService) {
     super();
   }
 
-  // This method is used to validate user
-  // If user exist and password is correct then return the user
-  async validate(username: string, password: string): Promise<any> {
-    const isUserExist = await this.userService.findUserByEmail(username);
-    if (!isUserExist) {
-      throw new NotFoundException(); // If user does not exist then throw the error
+  /**
+   * Method to validate user credentials
+   * @param username - User's email
+   * @param password - User's password
+   * @returns User object if credentials are valid
+   * @throws NotFoundException if user does not exist
+   * @throws BadRequestException if password is incorrect
+   */
+  async validate(
+    username: string,
+    password: string,
+  ): Promise<LocalUserValidation> {
+    const user = await this.userService.findUserByEmail(username);
+
+    // If user does not exist, throw NotFoundException
+    if (!user) {
+      throw new NotFoundException();
     }
-    if (isUserExist && (await bcrypt.compare(password, isUserExist.password))) {
-      const { password, ...result } = isUserExist;
-      return result; // If user exist and password is correct then return the user
+
+    // If user exists, check if password is correct
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (isPasswordValid) {
+      const { _id, fullName, email, image, isAdmin } = user;
+      return { _id, fullName, email, image, isAdmin };
     }
-    throw new BadRequestException(); // If user exist but password is not correct then throw the error
+    // If password is incorrect, throw BadRequestException
+    throw new BadRequestException();
   }
 }

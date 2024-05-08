@@ -7,6 +7,9 @@ import { AuthModule } from './authentication/auth.module';
 import { UserModule } from './user_information/user.module';
 import { MoviesModule } from './movies_information/movies.module';
 import { CategoryModule } from './category/category.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { S3Module } from './aws/aws.module';
+import { VideoModule } from './user_videos/video.module';
 
 @Module({
   imports: [
@@ -27,6 +30,9 @@ import { CategoryModule } from './category/category.module';
     AuthModule,
     MoviesModule,
     CategoryModule,
+    VideoModule,
+    CloudinaryModule,
+    S3Module,
   ],
   controllers: [AppController],
   providers: [AppService],

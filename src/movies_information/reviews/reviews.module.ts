@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Reviews, reviewsSchema } from './reviews.entity';
 import { ReviewsService } from './reviews.service';

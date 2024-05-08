@@ -6,6 +6,7 @@ import {
 import { Category, CategoryDocument } from './category.entity';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { TypeOfCategory } from 'type';
 
 @Injectable()
 export class CategoryService {
@@ -19,7 +20,7 @@ export class CategoryService {
   //This method return all category
   // This method end point is ..…
   // @Get('/api/category')
-  async getAllCategory(): Promise<any> {
+  async getAllCategory(): Promise<TypeOfCategory[]> {
     try {
       return await this.categoryModel.find().exec();
     } catch (error) {
@@ -30,7 +31,7 @@ export class CategoryService {
   //This method return a category based on id
   // This method end point is ..：
   // @Get('/api/category/:id')
-  async getCategoryById(id: string): Promise<any> {
+  async getCategoryById(id: string): Promise<TypeOfCategory> {
     try {
       const category = await this.categoryModel.findById(id).exec();
       if (!category) {
@@ -47,7 +48,7 @@ export class CategoryService {
   //This method create a category
   // This method end point is ..
   // @Post('/api/admin/category')
-  async createCategory(data: any): Promise<any> {
+  async createCategory(data: TypeOfCategory): Promise<TypeOfCategory> {
     try {
       return await this.categoryModel.create(data);
     } catch (error) {
@@ -58,9 +59,12 @@ export class CategoryService {
   //This method update a category
   // This method end point is ..
   // @Put('/api/admin/category/:id')
-  async updateCategory(id: string, data: any): Promise<any> {
+  async updateCategory(id: string, title: object): Promise<TypeOfCategory> {
     try {
-      return await this.categoryModel.findByIdAndUpdate({ _id: id }, data);
+      return await this.categoryModel.findByIdAndUpdate(
+        { _id: id },
+        { $set: title },
+      );
     } catch (error) {
       throw new NotFoundException(error);
     }
@@ -69,7 +73,7 @@ export class CategoryService {
   //This method delete a category
   // This method end point is ..
   // @Delete('/api/admin/category/:id')
-  async deleteCategory(id: string): Promise<any> {
+  async deleteCategory(id: string): Promise<string> {
     try {
       const isCategoryExist = await this.categoryModel.findByIdAndDelete({
         _id: id,
@@ -86,9 +90,10 @@ export class CategoryService {
   //This method delete all category
   // This method end point is ..
   // @Delete('/api/admin/category')
-  async deleteAllCategory(): Promise<any> {
+  async deleteAllCategory(): Promise<string> {
     try {
-      return await this.categoryModel.deleteMany({});
+      await this.categoryModel.deleteMany({});
+      return 'All Category deleted successfully';
     } catch (error) {
       throw new NotFoundException(error);
     }

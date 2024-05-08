@@ -9,44 +9,56 @@ import {
   UseFilters,
   UseGuards,
 } from '@nestjs/common';
-import { MoviesServices } from './movies.services';
 import { CustomException } from 'src/exceptions/custom.exception';
 import { AuthGuard } from '@nestjs/passport';
-import { RoleGaurd } from 'src/authentication/auth.rolegaurd';
+import { RoleGuard } from 'src/authentication/auth.rolegaurd';
+import { MoviesServices } from './movies.services';
+import { TypeOfMovies } from 'type';
 
 @Controller('/api/admin/movies') // This controller is for admin
 @UseFilters(CustomException) // This will catch all the exceptions
-@UseGuards(AuthGuard('jwt'), new RoleGaurd()) // This guard is for admin to verify the user is admin or not if is admin then allow to access it
+@UseGuards(AuthGuard('jwt'), new RoleGuard()) // This guard is for admin to verify the user is admin or not if is admin then allow to access it
 export class MoviesAdminController {
   constructor(private readonly moviesService: MoviesServices) {}
 
-  // This router used to create a movie
-  // This router take two parameter it is a user object from the auth guard and a movie object
-  // This router end point is /api/admin/movies/add
+  /**
+   * This URL is used to add movies
+   * @param req this req from the whis user is currently logged in it info provided by auth guard
+   * @param movie_info this is a movie object from the body
+   * @returns Promise<string> if movie is created sucessfully then provide string
+   */
   @Post('/add')
-  async addMovie(@Request() req, @Body() movie_info: any) {
+  async addMovie(@Request() req, @Body() movie_info: TypeOfMovies) {
     return await this.moviesService.createMovie(req._id, movie_info);
   }
 
-  // This router used to update movies
-  // This router take two parameter it is a user object from the auth guard and a movie object
-  // This router end point is /api/admin/movies/update/:id
+  /**
+   * This URL is used to update movie
+   * @param id It's a movie id take as parameter
+   * @param movie_info this is a movie object from the body
+   * @returns Promise<string> if movie is updated sucessfully then provide string
+   */
   @Put('/:id')
-  async updateMovie(
-    @Param('id') movie_id,
-    @Request() req,
-    @Body() movie_info: any,
-  ) {
-    return await this.moviesService.updateMovie(req._id, movie_id, movie_info);
+  async updateMovie(@Param('id') id, @Body() movie_info: TypeOfMovies) {
+    return await this.moviesService.updateMovie(id, movie_info);
   }
 
+  /**
+   * This URL is used to delete movie
+   * @param movie_id this is a movie id take as parameter to delete particular movie
+   * @returns Promise<TypeOfMovies> if movie is deleted successfully
+   */
   @Delete('/:id')
-  async deleteMovie(@Param('id') movie_id) {
+  async deleteMovie(@Param('id') movie_id): Promise<TypeOfMovies> {
     return await this.moviesService.deleteMovieById(movie_id);
   }
 
+  /**
+   * This URL is used to delete all movies
+   * @returns Promise<string> if all movies are deleted
+   */
   @Delete('/')
-  async deleteAllMovies() {
+  async deleteAllMovies(): Promise<string> {
     return await this.moviesService.deleteAllMovies();
   }
 }

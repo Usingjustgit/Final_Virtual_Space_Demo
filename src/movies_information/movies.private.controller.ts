@@ -3,7 +3,7 @@ import {
   Controller,
   Param,
   Post,
-  Request,
+  Req,
   UseFilters,
   UseGuards,
 } from '@nestjs/common';
@@ -17,15 +17,23 @@ import { CustomException } from 'src/exceptions/custom.exception';
 export class MoviesPrivateController {
   constructor(private readonly moviesService: MoviesServices) {}
 
-  // This route is for creating reviews
-  // This route takes movie_id and user_reviews
-  // and return the review
+  /**
+   * This method used to create Reviews for particular movie
+   * @param req This is request object from the authentication token
+   * @param movie_id This is movie id
+   * @param user_reviews This is user review object from the body
+   * @returns Promise<string> If movie review is sucessfully created then
+   */
   @Post('/:movie_id/review')
   async createReviews(
-    @Request() req,
+    @Req() req,
     @Param('movie_id') movie_id: string,
-    @Body() user_reviews: any,
-  ): Promise<any> {
+    @Body()
+    user_reviews: {
+      comment: string;
+      movie_rating: number;
+    },
+  ): Promise<string> {
     return await this.moviesService.createReviews(
       req.user,
       movie_id,
