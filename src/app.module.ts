@@ -20,7 +20,7 @@ import { VideoModule } from './user_videos/video.module';
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService): any => {
+      useFactory: (configService: ConfigService) => {
         return {
           uri: configService.get<string>('MONGO_URL'),
         };
