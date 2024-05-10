@@ -14,11 +14,11 @@ export class Docs {
   @Prop({ type: String, required: [true, 'docs_description is required'] })
   docs_description: string;
 
-  @Prop({ type: String, required: [true, 'docs_image is required'] })
-  docs_image: string;
-
   @Prop({ type: String, required: [true, 'docs_docs_url is required'] })
   docs_url: string;
+
+  @Prop({ type: Boolean, default: false })
+  isPublic: boolean;
 }
 
 export const docsSchema = SchemaFactory.createForClass(Docs);

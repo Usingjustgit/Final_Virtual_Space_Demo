@@ -39,6 +39,18 @@ export class User {
   @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Videos' }])
   videos: string[]; // Array of video IDs
 
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Musics' }])
+  musics: string[];
+
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Photos' }])
+  photos: string[];
+
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Docs' }])
+  documents: string[];
+
+  @Prop({ type: Boolean, default: false })
+  isDelete: boolean;
+
   @Prop({ type: Date, default: Date.now }) // Change the type to Date for timestamps
   timestamp: Date;
 

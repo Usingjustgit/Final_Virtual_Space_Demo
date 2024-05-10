@@ -34,6 +34,10 @@ export class AuthLocalStrategy extends PassportStrategy(Strategy) {
       throw new NotFoundException();
     }
 
+    if (user.isDelete) {
+      throw new NotFoundException();
+    }
+
     // If user exists, check if password is correct
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (isPasswordValid) {

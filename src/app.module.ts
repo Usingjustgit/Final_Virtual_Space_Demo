@@ -10,6 +10,9 @@ import { CategoryModule } from './category/category.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { S3Module } from './aws/aws.module';
 import { VideoModule } from './user_videos/video.module';
+import { DocsModule } from './user_docs/docs.module';
+import { PhotoModule } from './user_photos/photo.module';
+import { MusicModule } from './user_musics/music.module';
 
 @Module({
   imports: [
@@ -31,6 +34,9 @@ import { VideoModule } from './user_videos/video.module';
     MoviesModule,
     CategoryModule,
     VideoModule,
+    MusicModule,
+    PhotoModule,
+    DocsModule,
     CloudinaryModule,
     S3Module,
   ],

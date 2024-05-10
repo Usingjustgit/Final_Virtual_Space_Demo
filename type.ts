@@ -20,9 +20,13 @@ export interface TypeUser {
   likedMovies: string[] | TypeVideos; // Array of movie IDs
   isAdmin: boolean;
   image: string;
+  musics?: string[];
+  photos?: string[];
+  documents?: string[];
   updatedAt: Date;
   createdAt: Date;
   token: string;
+  isDelete?: boolean;
   __v: number;
   save?: () => void;
 }

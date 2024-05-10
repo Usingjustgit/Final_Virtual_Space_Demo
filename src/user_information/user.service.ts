@@ -154,7 +154,7 @@ export class UserService {
       }
 
       // Delete the user
-      await this.userModel.findByIdAndDelete(id);
+      await this.userModel.findByIdAndUpdate({ _id: id }, { isDelete: true });
 
       return 'User deleted successfully'; // Return success message after deletion
     } catch (error) {
@@ -416,7 +416,7 @@ export class UserService {
   async deleteUserById(id: string): Promise<string> {
     try {
       // Attempt to delete the user by ID
-      await this.userModel.findByIdAndDelete({ _id: id });
+      await this.userModel.findByIdAndUpdate({ _id: id }, { isDelete: true });
       // If deletion is successful, return a success message
       return 'User deleted successfully';
     } catch (error) {
