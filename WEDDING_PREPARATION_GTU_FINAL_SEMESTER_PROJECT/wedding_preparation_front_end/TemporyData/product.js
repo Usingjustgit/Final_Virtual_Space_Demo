@@ -1,0 +1,167 @@
+export const products = [
+  {
+    id: 1001,
+    name: "Boys' Striped T-Shirt",
+    description: "Comfortable and stylish striped t-shirt for boys.",
+    price: 5000,
+    category: "Boys' Clothing",
+    size: "Medium",
+    color: ["Blue", "Green", "Red"],
+    material: "Cotton",
+    care_instructions: "Machine wash cold, tumble dry low",
+    weight: 0.5,
+    quantity: 71,
+    rating: 4.2,
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaesZ0Xu-312Xhx-1vC1TcPq40wrBWkMNOzM-POei2-CqitMcfj7VjhF2dKAJMcEq8e7Q&usqp=CAU",
+  },
+
+  {
+    id: 1005,
+    name: "Boys' Graphic T-Shirt",
+    description:
+      "Trendy graphic t-shirt for boys featuring fun and colorful designs.",
+    price: 12999,
+    category: "Boys' Clothing",
+    size: "Medium",
+    color: ["Black", "White"],
+    material: "Cotton",
+    care_instructions: "Machine wash cold, tumble dry low",
+    weight: 0.5,
+    quantity: 9,
+    rating: 4.2,
+    image: "https://d1pdzcnm6xgxlz.cloudfront.net/tops/8905875070986-9.jpg",
+  },
+  {
+    name: "Elegant Lace Princess Gown",
+    description:
+      "An elegant lace princess gown with intricate beadwork and a flowing train.",
+    price: 499.99,
+    category: "Princess Gown",
+    size: "Medium",
+    color: "Ivory",
+    material: "Lace and Tulle",
+    careInstructions: "Dry clean only",
+    weight: 2.5,
+
+    quantity: 35,
+    rating: 4.5,
+    image:
+      "https://i.pinimg.com/736x/1a/49/b0/1a49b0a9435977ee4a7d2963050c1c60.jpg",
+  },
+  {
+    name: "Sparkling Mermaid Dress",
+    description:
+      "A sparkling mermaid dress with sequin detailing and a sweetheart neckline.",
+    price: 599.99,
+    category: "Mermaid Dress",
+    size: "Small",
+    color: "Champagne",
+    material: "Sequin and Organza",
+    careInstructions: "Spot clean only",
+    weight: 3,
+
+    quantity: 17,
+    rating: 4.2,
+    image:
+      "https://lauren-elaine.com/cdn/shop/products/capella1editwebblur.jpg?v=1571264883",
+  },
+  {
+    name: "Bohemian Off-Shoulder Gown",
+    description:
+      "A bohemian off-shoulder gown with delicate lace sleeves and a flowing skirt.",
+    price: 449.99,
+    category: "Bohemian Gown",
+    size: "Large",
+    color: "White",
+    material: "Chiffon and Lace",
+    careInstructions: "Hand wash in cold water",
+    weight: 2.2,
+    quantity: 11,
+    rating: 3.1,
+    image:
+      "https://i.etsystatic.com/28939863/r/il/287bda/3356821537/il_570xN.3356821537_9dqu.jpg",
+  },
+  {
+    name: "Vintage Tea-Length Dress",
+    description:
+      "A vintage-inspired tea-length dress with floral lace overlay and a satin sash.",
+    price: 349.99,
+    category: "Tea-Length Dress",
+    size: "Extra Small",
+    color: "Blush",
+    material: "Lace and Satin",
+    careInstructions: "Dry clean recommended",
+    weight: 3,
+    quantity: 31,
+    rating: 3.7,
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNVKxJF55kPbROCWouo5_D_JWQ0NTcLntNJp7RZVF_zg&s",
+  },
+  {
+    name: "Classic A-Line Ball Gown",
+    description:
+      "A classic A-line ball gown with a beaded bodice and full tulle skirt.",
+    price: 699.99,
+    category: "Ball Gown",
+    size: "Medium",
+    color: "Ivory",
+    material: "Tulle and Satin",
+    careInstructions: "Dry clean only",
+    weight: 3.5,
+    quantity: 11,
+    rating: 4.3,
+    image:
+      "https://www.sherrihill.com/dw/image/v2/BDBR_PRD/on/demandware.static/-/Sites-master-catalog-sherrihill/default/dw678c980b/images/Sherri-Hill-56196-fuchsia-53739.jpg?sw=300&sh=450",
+  },
+  {
+    id: 1002,
+    name: "Boys' Denim Jeans",
+    description: "Classic denim jeans for boys with a modern fit.",
+    price: 15000,
+    category: "Boys' Clothing",
+    size: "Large",
+    color: ["Indigo Blue", "Sky Blue", "Purple"],
+    material: "Denim",
+    care_instructions: "Wash inside out, cold water, hang dry",
+    weight: 0.6,
+    quantity: 43,
+    rating: 4,
+    image:
+      "https://www.mumkins.in/cdn/shop/files/jeans-for-boys-bl062714c-black-1.jpg?v=1685514432&width=1080",
+  },
+  {
+    id: 1003,
+    name: "Boys' Hooded Sweatshirt",
+    description:
+      "Warm and cozy hooded sweatshirt for boys, perfect for chilly days.",
+    price: 19999,
+    category: "Boys' Clothing",
+    size: "Small",
+    color: ["Khaki", "Green", "Pressed Black"],
+    material: "Cotton",
+    care_instructions: "Machine wash cold, tumble dry low",
+    weight: 0.3,
+    quantity: 55,
+    rating: 4.9,
+    image:
+      "https://cdn16.nnnow.com/web-images/large/styles/40Y2ELCHOSJ/1667209614876/1.jpg",
+  },
+  {
+    id: 1004,
+    name: "Boys' Cargo Shorts",
+    description:
+      "Functional and durable cargo shorts for boys, ideal for outdoor activities.",
+    price: 11990,
+    category: "Boys' Clothing",
+    size: "Large",
+    color: ["Gray"],
+    material: "Cotton",
+    care_instructions: "Machine wash cold, tumble dry low",
+    weight: 0.2,
+    quantity: 27,
+    rating: 5,
+    image:
+      "https://4.imimg.com/data4/VS/GB/MY-11310152/boys-cargo-shorts-500x500.jpg",
+  },
+];

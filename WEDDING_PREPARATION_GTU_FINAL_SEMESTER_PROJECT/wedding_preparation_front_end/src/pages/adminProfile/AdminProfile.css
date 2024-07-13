@@ -1,0 +1,75 @@
+.admin-profile {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-profile .front-admin {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.admin-profile .third-admin {
+  display: flex;
+  text-shadow: 0 0 9px rgba(0, 0, 0, 0.7);
+  justify-content: space-between;
+  min-width: 401px;
+  margin-right: 31px;
+  flex-direction: row;
+}
+
+.third-admin-button {
+  margin-top: 17px;
+  justify-content: center;
+  display: flex;
+}
+
+.front-admin img {
+  margin: auto;
+  width: 221px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 13px rgba(0, 0, 0, 0.7);
+}
+
+.admin-profile h4 {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 0 0 9px rgba(0, 0, 0, 0.5);
+  margin: 27px 0;
+  font-family: "Petit Formal Script", cursive;
+}
+
+.totals {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.total-item {
+  cursor: pointer;
+  background-color: var(--bs-white);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 3px solid #fd5d5d;
+  box-shadow: 0 0 13px rgba(0, 0, 0, 0.7);
+  flex-basis: calc(50% - 20px); /* Two items per row with a little gap */
+}
+
+.total-item h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.total-item p {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}

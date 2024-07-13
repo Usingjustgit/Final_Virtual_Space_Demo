@@ -1,0 +1,15 @@
+p {
+  color: black;
+}
+
+.fiels-of-profile {
+  display: flex;
+  justify-content: center;
+}
+
+.fiels-of-profile div {
+  max-width: 571px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
