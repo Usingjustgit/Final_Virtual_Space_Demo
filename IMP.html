@@ -1,0 +1,728 @@
+<script>
+
+// =========================================================
+//    1) Array Rotation  
+// =========================================================
+
+    let arrayRotation = arr => {
+        let givenRotation = arr[0];
+        return (arr.splice(givenRotation, arr.length).concat(arr.slice(0,givenRotation))).join('');
+    }
+
+// console.log(arrayRotation([2, 3, 4, 1, 6, 10])) //'4161023'
+// console.log(arrayRotation([3, 2, 1, 6])) //'6321'
+// console.log(arrayRotation([4, 3, 4, 3, 1, 2])) //'124343'
+// console.log(arrayRotation([])) //''
+// console.log(arrayRotation([7])) //'7'
+
+// =========================================================
+//    2) Stap_Wacking of given number.
+// =========================================================
+
+    let stepWoking = (num) => {
+
+        if(!Number.isInteger(num) || num < 0){
+            return -1;
+        }
+
+        const stepIncrement = [1,2];
+        const stepCombo = [];
+
+        let queue = stepIncrement.map(num => [num]);
+
+        while(queue.length !== 0){
+
+            const nextQueue = [];
+
+            queue.forEach(stepList => {
+                const sum = stepList.reduce((sum,num) => sum += num, 0);
+                if(sum === num){
+                    stepCombo.push(stepList);
+                    return;
+                }
+                stepIncrement.forEach(increment => {
+                    if(sum + increment <= num){
+                        const stepCopy = stepList.slice();
+                        stepCopy.push(increment);
+                        nextQueue.push(stepCopy);
+                    }
+                });
+            });
+            queue = nextQueue;
+        }
+        return stepCombo.length;
+    }
+
+    // console.log(stepWoking(4)); //5
+    // console.log(stepWoking(5)); // 8
+    // console.log(stepWoking(6)); // 13
+    // console.log(stepWoking(7)); // 21
+    // console.log(stepWoking(8)); // 34
+    // console.log(stepWoking(9)); // 55
+    // console.log(stepWoking(13)); // 377
+
+// =========================================================
+//    3) Line_Ordaring of given array number.
+// =========================================================
+
+let permutation = array => {
+    let count = Array(array.length).fill(0);
+
+    const result = [array.slice()];
+
+    let i = 0;
+    while(i < array.length){
+        if(count[i] < i){
+            if(i % 2 === 0){
+                let temp = array[0];
+                    array[0] = array[i];
+                    array[i] = temp;
+            }else{
+                let temp = array[count[i]];
+                    array[count[i]] = array[i];
+                    array[i] = temp;
+            }
+            result.push(array.slice());
+            count[i]++;
+            i = 0;
+        }else{
+            count[i] = 0;
+            i++;
+        }
+    }
+    return result;
+}
+
+let relationValidation = (permute, array) => {
+    for(let i in array){
+        let [personA, relation, personB] = array[i].split('');
+
+        if(relation === "<"){
+            [personB, personA] = [personA, personB];
+        }
+
+        const indexPersonA = permute.indexOf(personA);
+        const indexPersonB = permute.indexOf(personB);
+
+        if(indexPersonA <= indexPersonB){
+            return false;
+        }
+    }
+    return true;
+}
+
+let lineOrdaring = array => {
+    let people = Array.from(new Set(array.join(',').match(/[A-Z]+/g)));
+
+    const peoplePermutations = permutation(people);
+    const permutationValid = [];
+
+    peoplePermutations.forEach(permute => {
+        const relationValid = relationValidation(permute, array);
+        if(relationValid){
+            permutationValid.push(permute);
+        }
+    });
+
+    return permutationValid.length;
+}
+
+// console.log(lineOrdaring(["J>B","B<S","D<J"])); //5
+// console.log(lineOrdaring(["A>B","A<C","C<Z"])); //1
+
+// =========================================================
+//    4) Array Coupling of given Array.
+// =========================================================
+
+let arrayCouples = arr => {
+    
+    const invalidCouples = [];
+
+    let isValid = (arr, pair, idx) => {
+        for(let i = 0; i < arr.length; i += 2){
+            let [left , right] = pair;
+            if(idx !== i && arr[i] === left && arr[i+1] === right){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    for ( let i = 0; i < arr.length; i+=2){
+        let left = arr[i];
+        let right = arr[i+1];
+        if(!isValid(arr,[right,left],i)){
+            invalidCouples.push(left,right);
+        }
+    }
+    return invalidCouples.length === 0 ? "YES" : invalidCouples.join(',');
+}
+
+// console.log(arrayCouples([ 4, 5, 1, 4, 5, 4, 4, 1])); //yes
+// console.log(arrayCouples([ 6, 2, 2, 6, 5, 14, 14, 1])); // 5,14,14,1
+// console.log(arrayCouples([ 2, 1, 1, 2, 3, 3])); // 3,3
+// console.log(arrayCouples([ 5, 4, 6, 7, 7, 6, 4, 5])); // yes
+
+// =========================================================
+//    5) gesStation of given String Array.
+// =========================================================
+
+
+let gasStation = strArr => {
+    let station = strArr[0];
+
+    for(let i = 0; i < station; i++){
+        let gas = 0;
+        for(let j = 0; j < station; j++){
+            let index = [i+j]%station+1;
+            let data = strArr[index].split(':');
+            gas += Number(data[0])-Number(data[1]);
+            if(gas < 0){
+                break;
+            }
+        }
+        if(gas >= 0){
+            return i + 1;
+        }
+    }
+    return 'impossible';
+}
+
+// console.log(getDistant(["4", "1:1", "2:2", "1:2", "0:1" ])); // impossible
+// console.log(getDistant(["4", "0:1", "2:2", "1:2", "3:1"])); // 4
+// console.log(getDistant(["4", "3:1", "2:2", "1:2", "0:1"])); // 1
+// console.log(getDistant(["3", "2:3", "2:1", "4:4"])); // 2 
+// console.log(getDistant(["5", "3:3", "1:2", "2:2", "3:2", "4:3"])); // 3
+// console.log(getDistant([ "5", "0:1", "2:1", "3:2", "4:6", "4:3"])); // 2
+// console.log(getDistant(["2", "1:2", "1:2"])); // impossible
+// console.log(getDistant([ "6", "3:2", "2:2", "10:6", "0:4", "1:1", "30:10"])); // 1
+
+
+// =========================================================
+//    6) MatchingCouples of given Array.
+// =========================================================
+
+
+let matchingCouples = arr => {
+    let [boys, girls, numOfCouples] = arr;
+
+    let factorial = num => {
+        return Array.from({length:num},(c,i)=>i+1).reduce((m,c)=>m*c,1);
+    }
+
+    let possiblePairs = Math.round(numOfCouples/2);
+
+    let boysPossiblePair = factorial(boys) / (factorial(possiblePairs)*factorial(boys - possiblePairs));
+    let girlsPossiblePair = factorial(girls) / (factorial(possiblePairs)*factorial(girls-possiblePairs));
+    return boysPossiblePair * girlsPossiblePair * factorial(possiblePairs);
+}
+
+// console.log(matchingCouples([5, 3, 2])); //15
+// console.log(matchingCouples([10, 5, 4])); //900
+// console.log(matchingCouples([5, 5, 4 ])); //200
+// console.log(matchingCouples([2, 2, 2 ])); //4
+// console.log(matchingCouples([10, 10, 6])); //86400
+// console.log(matchingCouples([15, 10, 6])); //327600
+
+// =========================================================
+//    7) Optimal_AssingnMent of given Array.
+// =========================================================
+
+let getTotalCost = (matrix, permut) => {
+    let cost = 0;
+    for(let i = 0; i<permut.length; i++){
+        cost += matrix[i][permut[i]];
+    }
+    return cost;
+}
+
+let permute = array => {
+    let comb = Array(array.length).fill(0);
+    let i = 0;
+    const result = [array.slice()];
+    while(i < array.length){
+        if(comb[i] < i){
+            if(i%2 === 0 ){
+                const temp = array[0];
+                    array[0] = array[i];
+                    array[i] = temp;
+            }else{
+                const temp = array[comb[i]];
+                    array[comb[i]] = array[i];
+                    array[i] = temp;
+            }
+            result.push(array.slice());
+            comb[i]++;
+            i = 0;
+        }else{
+            comb[i] = 0;
+            i++;
+        }
+    }
+    return result;
+}
+
+let optimalStation = array => {
+    let matrix = array.map(row => row.match(/\d+/g).map(Number));
+
+    const task = [];
+    for(let i = 0; i<array.length; i++){
+        task.push(i);
+    }
+
+    let permutations = permute(task);
+    console.log(permutations);
+    let minCost = Number.MAX_SAFE_INTEGER;
+    let minAssingment = [];
+
+    permutations.forEach(permute => {
+        const cost = getTotalCost(matrix, permute);
+        console.log(cost);
+
+        if(cost < minCost){
+            minCost = cost;
+            minAssingment = permute;
+        }
+    });
+
+    return minAssingment.map((value, index) => `(${index+1}-${value+1})`).join('');
+}
+
+// console.log(optimalStation(["(5,4,2)","(12,4,3)","(3,4,13)"])); //(1-3)(2-2)(3-1)
+
+// =========================================================
+//    8) Counting_Anagrams of given Array.
+// =========================================================
+
+let countinAnagrams = str => {
+    let strArr = str.split(' ');
+    let uniqueWord = new Set(strArr);
+
+    let obj1 = {};
+
+    uniqueWord.forEach(word => {
+
+        let key = word.split('').sort().join('');
+        if(obj1[key] === undefined){
+            obj1[key] = 1;
+        }else{
+            obj1[key]++;
+        }
+    });
+    return Object.values(obj1).reduce((sum,val) => sum += (val-1),0);
+ }
+
+// console.log(countingAnagram("cars are very cool so are arcs and my os")); //<< endl; // 2
+// console.log(countingAnagram("aa aa odg dog gdo")); //<< endl; // 2
+// console.log(countingAnagram("a c b c run urn urn")); //<< endl; // 1
+// console.log(countingAnagram("mom omm mmo pop opp")); //<< endl; // 3
+
+// =========================================================
+//    9) Approching Fibonachi of given Array.
+// =========================================================
+
+
+let nearFibonachi = arr => {
+    let sum = arr.reduce((sum,num) => sum += num , 0);
+
+    let a = b = 1;
+    let result = 0;
+    do{
+        c = a+b;
+        a = b;
+        b = c;
+        result = c;
+    }while(c < sum);
+    return result-sum;
+}
+
+// console.log(nearFibonachi([15,1,3])); //2
+
+// =========================================================
+//    10) Polynomiyal Estimation.
+// =========================================================
+
+// Simple JavaScript program to add two
+// polynomials
+// A utility function to return maximum 
+// of two integers
+
+// A[] represents coefficients of first polynomial
+// B[] represents coefficients of second polynomial
+// m and n are sizes of A[] and B[] respectively
+// function add(A, B, m, n){
+// 	let size = Math.max(m, n);
+// 	var sum = [];
+// 	for (var i = 0; i < 10; i++) sum[i] = 0;
+// 	// Initialize the product polynomial
+// 	for(let i = 0;i<m;i++){ 
+// 		sum[i] = A[i];
+// 	}
+
+// 	// Take ever term of first polynomial
+// 	for (let i = 0;i<n;i++){
+// 		sum[i] += B[i];
+// 	}
+// 	return sum;
+// }
+
+// // A utility function to print a polynomial
+// function printPoly(poly, n){
+// 	let ans = '';
+// 	for(let i = 0;i<n;i++){
+// 		ans += poly[i];
+// 		if (i != 0){
+// 			ans +="x^ ";
+// 			ans +=i;
+// 		}
+// 		if (i != n - 1){
+// 			ans += " + ";
+// 		}
+// 	}
+// 	document.write(ans);
+// }
+// let A = [5, 0, 10, 6];
+// let B = [1, 2, 4];
+// let m = A.length;
+// let n = B.length;
+// printPoly(A, m);
+// printPoly(B, n);
+// let sum = add(A, B, m, n);
+// let size = Math.max(m, n);
+// printPoly(sum, size);
+
+
+// =========================================================
+//    11) Max heap sum.
+// =========================================================
+
+
+let maxHeap = arr => {
+    const invlaidNode = [];
+    for(let i = 0; i < arr.length; i++){
+
+        let rootNode = arr[i];
+        let leftNode = 2 * i + 1;
+        let rightNode = 2 * i + 2;
+
+        if(leftNode < arr.length && arr[leftNode] > rootNode){
+            invlaidNode.push(arr[leftNode]);
+        }
+        if(rightNode < arr.length && arr[rightNode] > rootNode){
+            invlaidNode.push(arr[rightNode]);
+        }
+    }
+    return invlaidNode.length === 0 ? "max" : invlaidNode.join(',');
+}
+
+
+// console.log(maxHeap([100, 19, 36, 17])); // max
+// console.log(maxHeap([10, 19, 52, 13, 16])); // 19,52
+// console.log(maxHeap([10, 19, 52, 104, 14])); //19,52,104
+// console.log(maxHeap([73, 74, 75, 7, 2, 107])); //74,75,107
+// console.log(maxHeap([1, 5, 10, 2, 3]));//5,10
+// console.log(maxHeap([5, 2, 1, 1, 1]));//max
+// console.log(maxHeap([86, 100, 2]));//100
+// console.log(maxHeap([73, 74, 81, 79, 90]));//74,81,79,90
+// console.log(maxHeap([73, 72, 1, 79, 90]));//79,90
+// console.log(maxHeap([100, 99, 98, 97, 96, 95, 94]));//max
+
+
+// =========================================================
+//    12) blackjack of found of given stringArr.
+// =========================================================
+
+let backJackCards = strArr => {
+    let highest = -1;
+    let highCard = "";
+    let total = 0;
+    let aceFound = false;
+    let cards = ['ace','two','three','four','five','six','seven','eight','nine','ten','jack','queen','king'];
+    let values = [1,2,3,4,5,6,7,8,9,10,10,10,10];
+
+    for(let i = 0; i < strArr.length; i++){
+        for(let j = 0; j < cards.length; j++){
+            if(strArr[i] === cards[j]){
+                total += values[j];
+                if(j > highest){ highest = j; highCard = cards[j]};
+                if(j === 0){ aceFound = true };
+            }
+        }
+    }
+
+    if(aceFound && total <= 11){
+        total += 10;
+        highest = 11;
+        highCard = 'ace';
+    }
+
+    if(total < 21){ return "below " + highCard};
+    if(total > 21){ return "high " + highCard};
+    if(total === 21){ return "blckJack "+ highCard};
+
+    return strArr;
+}
+
+// console.log(backJackCards(['four','ace','ten']));
+// console.log(backJackCards(['ace','queen']));
+// console.log(backJackCards(['four','ace','ten','king']));
+
+
+
+// =========================================================
+//    13) Pascal Triangle.
+// =========================================================
+
+let factorials = num => {
+    return Array.from({length: num},(c,i) => i + 1).reduce((mul,cur) => mul*cur,1);
+}
+
+let pascalTriangle = arr => {
+    const row = arr[1];
+    const number = arr.length;
+
+    return factorials(row)/(factorials(number)*factorials(row-number));
+}
+
+// console.log(pascalTriangle([1,4])); //6
+
+
+// =========================================================
+//    14) Longest Common Subsequence.
+// =========================================================
+
+function LCS (strArr) {
+
+    let str1 = strArr [0];
+    let str2 = strArr [1];
+
+    let n = str1.length;
+    let m = str2.length;
+
+    let dp = Array (n + 1).fill ().map (() => Array (m + 1).fill (0));
+    for (let i = 1; i <= n; i++) {
+        for (let j = 1; j <= m; j++) {
+
+            if (str1 [i - 1] === str2 [j - 1]) {
+                dp [i] [j] = dp [i - 1] [j - 1] + 1;
+            } else {
+
+                dp [i] [j] = Math.max (dp [i - 1] [j], dp [i] [j - 1]);
+
+            }
+        }
+    }
+    return dp [n] [m];
+}
+
+// console.log (LCS (["abcabb", "bacb"])); // 3
+// console.log (LCS (["abc", "def"])); // 0
+// console.log (LCS (["abca", "acba"])); // 3
+// console.log (LCS (["AGGTAB", "GXTXAYB"])); // 4
+// console.log (LCS (["BD", "ABCD"])); // 2
+
+// =========================================================
+//    15) Calculator.
+// =========================================================
+
+let calculator = str =>{
+    let output = str[0];
+    for(let i = 1; i < str.length; i++){
+        if(str[i] === '(' && (str[i-1] === ')' || !isNaN(str[i-1]))){
+            output += '*';
+        }
+        output += str[i];
+    }
+    return eval(output); 
+}
+
+// console.log(calculator("6*(4/2)+3*1")); //15
+// console.log(calculator("2+(3-1)*3")); //8
+// console.log(calculator("(2)+4*2")); //10
+// console.log(calculator("(2-0)(6/2)")); //6
+// console.log(calculator("6/3-1")); // 1
+// console.log(calculator("2+4+5"));//11
+// console.log(calculator("3+5*2*2"));//23
+// console.log(calculator("2+7*2+2"));//18
+// console.log(calculator("1+4*2+3*1"));//12
+// console.log(calculator("45-10*2-1"));//24
+// console.log(calculator("100*2"));//200
+// console.log(calculator("7-2+(5-2)"));//8
+// console.log(calculator("812/2*(5-3)"));//812
+// console.log(calculator("7-4-1+8(3)/2"));//14
+// console.log(calculator("(5-2*0-9*0)*0"));//0
+// console.log(calculator("8-7*(12+100/2)*9-2"));//-3900
+
+// =========================================================
+//    15) Array Jumping.
+// =========================================================
+
+let arrayJumping = arr => {
+    let maxNum = Math.max(...arr);
+    let indexOfMaxNum = arr.indexOf(maxNum);
+
+    let queue = [[indexOfMaxNum]];
+
+    while(queue.length !== 0){
+        const tempQueue = [];
+
+        for(let i = 0; i < queue.length; i++){
+            const subArr = queue[i];
+            const lastElement = subArr[subArr.length-1];
+
+            const left = (((lastElement - arr[lastElement])%arr.length)+arr.length)%arr.length;
+            const right = (lastElement + arr[lastElement])%arr.length;
+
+            if(left === indexOfMaxNum || right === indexOfMaxNum){
+                return subArr.length;
+            }
+
+            if(!subArr.includes(left)){
+                const leftArr = subArr.slice();
+                leftArr.push(left);
+                tempQueue.push(leftArr);
+            }
+            if(!subArr.includes(right)){
+                const rightArr = subArr.slice();
+                rightArr.push(right);
+                tempQueue.push(rightArr);
+            }
+        }
+        queue = tempQueue;
+    }
+    return -1;
+}
+
+// console.log(arrayJumping([ 2, 3, 5, 6, 1])); //2
+// console.log(arrayJumping([1, 2, 3, 4, 2])); //3
+// console.log(arrayJumping([ 1, 7, 1, 1, 1, 1])); //2
+// console.log(arrayJumping([1, 2, 1, 2, 1, 12])); //1
+// console.log(arrayJumping([0, 5, 2])); //2
+
+
+// =========================================================
+//    15) Parallel Sum
+// =========================================================
+
+
+let parallalSum = arr =>{
+    arr.sort((a,b)=> b - a);
+
+    let sum = arr => arr.reduce((s,c) => s+=c,0);
+
+    let totalSum = sum(arr);
+    if(totalSum % 2 !== 0) return -1;
+    const firstArr = [];
+    const secoundArr = [];
+
+    let firstNum = arr[0];
+    let secoundNum = arr[1];
+
+    firstArr.push(arr[0]);
+    secoundArr.push(arr[1]);
+
+    for(let i = 2; i < arr.length; i++){
+        let currentFirstNum = firstNum + arr[i];
+        let currentSecoundNum = secoundNum + arr[i];
+
+        if(currentFirstNum > currentSecoundNum) {
+            secoundArr.push(arr[i]);
+            secoundNum += arr[i];
+        }else{
+            firstArr.push(arr[i]);
+            firstNum += arr[i];
+        }
+    }
+    firstArr.reverse();
+    secoundArr.reverse();
+
+    if(sum(firstArr) !== sum(secoundArr)){
+        return -1;
+    }
+    
+    return (firstArr[0] < secoundArr[0] ? firstArr.concat(secoundArr) : secoundArr.concat(firstArr)).join(',');
+}
+
+// console.log(parallalSum([1,5,11,5]));
+// console.log(parallalSum([16, 22, 35, 8, 20, 1, 21, 11]));
+// console.log(parallalSum([1,2,3,4]));
+// console.log(parallalSum([1,2,1,5]));
+
+// =========================================================
+//    16) Roman Number Checking
+// =========================================================
+
+let romanNumber = string =>{
+    let count = 0;
+    let currency = {
+        "I":1,
+        'V':5,
+        'X':10,
+        'L':50,
+        'C':100,
+        "D":500,
+        'M':1000
+    }
+
+    for(let i = 0; i < string.length; i++){
+        count += currency[string[i]];
+    }
+
+    let answer = "";
+    while(count > 0){
+        let key = Object.keys(currency).filter(val => currency[val] <= count)
+        count -= currency[key[key.length-1]];
+        answer += key[key.length-1];
+    }
+    return answer;
+}
+
+// console.log(romanNumber("XXXVVIIIIIIIIII")); //L
+// console.log(romanNumber("DDLL")); //MC
+// console.log(romanNumber("LLLXXXVVVV")); //CC
+
+// =========================================================
+//    17) WildCardCharacter Checking
+// =========================================================
+
+
+let wildCard = string => {
+    let [pattern, str] = string.split(' ');
+    let regularExp = '^', n = 1;
+
+    let tokenHasLength = idx => {
+        if(idx + 1 < pattern.length && string[idx+1] === '{'){
+            return true;
+        }
+        return false;
+    }
+
+    for(let i = 0; i < pattern.length; i++){
+        switch(pattern[i]){
+            case '+':
+                regularExp += '[a-z]';
+                break;
+            case '*':
+                let repeat = 0;
+                if(tokenHasLength(i)){
+                    repeat = Number(string[i+2])-1;
+                    i = i + 3;
+                }else{
+                    repeat = 2;
+                }
+                regularExp += '([a-z])\\'+ n++  +'{' + repeat + '}';
+                break;
+            default: 
+                break;
+        }
+    }
+    regularExp += "$";
+    regularExp = new RegExp(regularExp,'i');
+    return String(regularExp.test(str));
+}
+
+// console.log(wildCard('++*{5} gheeeee'));
+
+
+
+</script>
