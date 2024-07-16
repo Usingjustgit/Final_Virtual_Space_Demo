@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:fragment="layout(content)">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+            crossorigin="anonymous"
+    />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/user/User_Main_Deshbord.css}" />
+</head>
+<body>
+<link rel="stylesheet" type="text/css" th:href="@{/CSS/user/User_Main_Deshbord.css}" />
+
+<header class="header">
+    <div class="contain">
+        <div class="scroll-background" id="nav">
+            <a class="logo" href="#">Contect Diary</a>
+            <ul class="unorder-list">
+                <li class="lists"><a class="list-link" href="#">Home</a></li>
+                <li class="lists"><a class="list-link" href="#">About</a></li>
+                <li class="lists"><a class="list-link" href="#">Contects</a></li>
+                <li class="lists"><a class="list-link" href="#">Contect us</a></li>
+                <li class="lists"><a class="list-link" href="#">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<section>
+    <div class="main_Contain">
+        <div class="left-side">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class='bx bx-home'></i></span>
+                        <span class="title">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class='bx bx-user-circle'></i></span>
+                        <span class="title">About</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/user/view/all/contects}">
+                        <span class="icon"><i class='bx bxs-user-account' ></i></span>
+                        <span class="title">All Contects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" th:href="@{'/user/add-contect'}">
+                        <span class="icon"><i class='bx bxs-book-add'></i></span>
+                        <span class="title">Services</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class='bx bxs-cog bx-spin'></i></span>
+                        <span class="title">Setting</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class='bx bx-log-out bx-flashing bx-flip-horizontal' ></i></span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="toggle">
+
+            </div>
+        </div>
+        <div class="right-side">
+            <div th:include="${content}"></div>
+        </div>
+    </div>
+</section>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+        crossorigin="anonymous"
+></script>
+<script>
+    let left_side = document.querySelector(".left-side");
+    let right_side = document.querySelector(".right-side");
+    let toggle = document.querySelector(".toggle");
+
+    toggle.onclick = () => {
+        left_side.classList.toggle('active');
+        right_side.classList.toggle('active');
+    }
+</script>
+</body>
+</html>

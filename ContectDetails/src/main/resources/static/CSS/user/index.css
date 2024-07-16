@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=REM&family=Roboto+Slab:wght@600&family=Signika+Negative&display=swap');
+
+body{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+.header{
+    top: 0%;
+    left: 0%;
+    width: 100vw;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url("../../Images/Front_image.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url("../../Images/Uploaded_picture/back.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.background{
+    width: 100vw;
+    display: flex;
+    padding: 41px;
+    justify-content: space-around;
+    align-items: center;
+    background: transparent;
+}
+
+.logo{
+    display: flex;
+    color: white;
+    text-decoration: none;
+    font-size: 41px;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 0 31px rgba(255, 255, 255, 0.9);
+    font-family:'Roboto Slab', serif;
+}
+
+.background .unorder-list{
+    gap: 21px;
+    display: flex;
+    margin: auto 0;
+    align-items: center;
+}
+
+.unorder-list .lists{
+    list-style: none;
+    font-size: 21px;
+
+}
+
+.lists .list-link{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.685);
+
+}
+
+
+.main-profile-pic{
+    display: block;
+    width: 221px;
+    height: 221px;
+    margin: 31px auto 21px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0 21px rgba(253, 249, 243, 0.7);
+}
+
+.main-profile-pic img{
+    width: 100%;
+    border: none;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.User-name{
+    width: 80%;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.User-name h3{
+    display: inline-block;
+    color: whitesmoke;
+    font-size: 51px;
+    margin-right: 11px;
+    text-shadow: 0 0 9px rgba(250, 174, 59, 0.5);
+    font-family: 'REM', sans-serif;
+}
+
+.User-name span{
+    display: inline-block;
+    color: whitesmoke;
+    font-size: 51px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: 0 0 21px rgba(246, 255, 0, 0.954);
+    font-family: 'Signika Negative', sans-serif;
+}
+
+.User-name p{
+    color: bisque;
+    margin-bottom: 81px;
+    text-shadow: 0 0 9px rgba(255, 243, 247, 0.5);
+}

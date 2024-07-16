@@ -1,0 +1,81 @@
+.form-container .form-vertical{ font-size: 0; }
+.form-container .form-vertical .form-group{
+    color: #333;
+    width: 100%;
+    padding: 0 8px;
+    margin: 0 0 15px;
+    display: inline-block;
+}
+.form-container .form-vertical .form-group label{
+    font-size: 17px;
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+.form-container .form-vertical .check-terms{
+    padding: 0 8px;
+    margin: 0 0 25px;
+}
+.form-container .form-vertical .check-terms .check-label{
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: italic;
+    vertical-align: top;
+    display: inline-block;
+}
+.form-container .form-vertical .check-terms .checkbox{
+    height: 17px;
+    width: 17px;
+    min-height: auto;
+    margin: 2px 8px 0 0;
+    border: 2px solid #d9d9d9;
+    border-radius: 2px;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    transition: all 0.3s ease 0s;
+}
+.form-container .form-vertical .check-terms .checkbox:before{
+    content: '';
+    height: 5px;
+    width: 9px;
+    border-bottom: 2px solid #00A9EF;
+    border-left: 2px solid #00A9EF;
+    transform: rotate(-45deg);
+    position: absolute;
+    left: 2px;
+    top: 2.5px;
+    transition: all 0.3s ease;
+}
+.form-container .form-vertical .check-terms .checkbox:checked:before{ opacity: 1; }
+.form-container .form-vertical .check-terms .checkbox:not(:checked):before{ opacity: 0; }
+.form-container .form-vertical .check-terms .checkbox:focus{ outline: none; }
+.form-container .signin-link{
+    color: #333;
+    font-size: 14px;
+    width: 100%;
+    margin-right: 30px;
+    display: inline-block;
+    vertical-align: top;
+}
+.form-container .form-vertical .signup{
+    color: #fff;
+    background: #00A9EF;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%;
+    padding: 8px 15px 9px;
+    border-radius: 10px;
+    transition: all 0.3s ease 0s;
+}
+.form-container .form-vertical .btn:hover,
+.form-container .form-vertical .btn:focus{
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    box-shadow: 3px 3px rgba(0,0,0,0.15),5px 5px rgba(0,0,0,0.1);
+    outline: none;
+}

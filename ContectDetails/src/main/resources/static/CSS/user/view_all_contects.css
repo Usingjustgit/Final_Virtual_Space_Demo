@@ -1,0 +1,84 @@
+.row{
+    max-height: min-content;
+}
+
+.card-box {
+    padding: 20px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    background-color: #fff;
+}
+
+.IconLinkes i{
+    font-size: 51px;
+    font-weight: 700;
+}
+
+.IconLinkes:hover {
+    color: #797979;
+    border: 2px solid #797979;
+}
+
+.card-box .thumb-lg {
+    display: block;
+    margin: auto;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background-color: black;
+}
+.text-pink {
+    color: #ff679b!important;
+}
+.btn-rounded {
+    border-radius: 2em;
+}
+.text-muted {
+    color: #98a6ad!important;
+}
+h4 {
+    line-height: 22px;
+    font-size: 18px;
+}
+.rows{
+    display: flex;
+    position: fixed;
+    right: 3%;
+    bottom: 5%;
+    justify-content: end;
+    align-items: center;
+    z-index: 100000;
+}
+.add-contect{
+    display: flex;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 41px;
+    height: 41px;
+    cursor: pointer;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+}
+.add-contect::before{
+    content: '';
+    width: 25px;
+    height: 3px;
+    position: absolute;
+    border-radius: 3px;
+    background-color: white;
+    transform: translateY(0) rotate(90deg);
+}
+
+.add-contect::after{
+    content: '';
+    width: 25px;
+    height: 3px;
+    position: absolute;
+    border-radius: 3px;
+    background-color: white;
+    transform: translateX(0);
+}

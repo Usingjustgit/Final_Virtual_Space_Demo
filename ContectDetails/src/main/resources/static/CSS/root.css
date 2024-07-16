@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=REM&family=Signika+Negative&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-wait: 500;
+    font-size: 21px;
+    user-select: none;
+    box-sizing: border-box;
+    background-color: #EAECEE;
+    font-family: 'Signika Negative', sans-serif;
+}
+
+.full-screen{
+    margin: 0;
+    paddign:0;
+    box-sizing: border-box;
+
+}
+
+.navbar{
+    margin: 0;
+    display: flex;
+    height: 61px;
+    padding: 5px;
+    list-style: none;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+}
+
+.main-logo{
+    color: white;
+    font-size: 41px;
+    font-weight: 700;
+    position: relative;
+    text-decoration: none;
+    background-color: transparent;
+    text-shadow: 0 0 7px rgba(255,247,245,0.7);
+}
+
+.list a{
+    background-color: black;
+    color: white;
+}
+
+.contents{
+    padding:0 11px;
+}
