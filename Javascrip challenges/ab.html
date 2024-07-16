@@ -1,0 +1,34 @@
+<script>
+
+function abSpaceFournd(str){
+
+    let findChar = ['a','b'];
+    let letterSpace = 3;
+
+    if(str.length < letterSpace+2){
+        return 'false';
+    }
+    
+    for(let i = 0; i<str.length-letterSpace-1; i++){
+
+        if(findChar[0] === str[i]){
+            if(str[i+letterSpace+1] === findChar[1]){
+                return 'true';
+            }
+        }
+    }
+    return 'false';
+}
+
+
+console.log(abSpaceFournd(''));
+
+
+// word count
+// time count   exapmal input = 90  output => 1:30 minites
+// third largest element.
+// vowel count  exampal input = "abvcdefghijkl"  output => 3;
+// swap case  conver string into exampal = "abcdekKFG" OUTPUT => "ABCDEkkfg";
+// secound gratest and low number exampal input = [1,2,3,4,5,6,7] output => 2 and 6
+
+</script>

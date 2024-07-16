@@ -1,0 +1,30 @@
+<script>
+
+let str1 = "Helodonel";
+let str2 = "Hlleo";
+
+for(let i = 0; i< str2.length; i++){
+    let char = str2[i];
+    let index = str1.indexOf(char);
+    if(index === -1){
+        console.log(false);
+        break;
+    }
+    if(str2.length-1 === i){
+        console.log(true);
+    }
+    console.log(str1.substring(0,index));
+    console.log(str1.substring(index+1));
+    str1 = str1.substring(0,index) + str1.substring(index + 1);
+}
+
+
+// =========================================== 
+// This is only to trying of the example....
+
+// let str = "Hello";
+
+// console.log(str.substring(4));
+
+
+</script>

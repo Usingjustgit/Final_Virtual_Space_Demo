@@ -1,0 +1,24 @@
+<!-- <script>
+    function countingTime(str){
+        let times = str.split('-');
+
+        times = times.map((currentValue, index, array) => {
+            // console.log(currentValue);
+            // console.log(array);
+            // console.log(index);
+            let pairs = currentValue.split(':');
+            // console.log(pairs);
+            // console.log(pairs[1][2]);
+            let time = (pairs[1][2]==='a'? parseInt(pairs[0])%12 : (parseInt(pairs[0])%12)+12) * 60+
+                parseInt(pairs[1][0]+pairs[1][1]); 
+            return time;
+        });
+
+        let diff = times[1] - times[0];
+        return diff < 0 ? diff + 1440 : diff;
+    }
+    console.log(countingTime('10:00pm-11:00pm'));
+    console.log(countingTime('1:00pm-1:00pm'));
+    console.log(countingTime('1:00pm-11:00am'));
+
+</> -->

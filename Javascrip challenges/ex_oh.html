@@ -1,0 +1,25 @@
+<script>
+
+    let exOhCount = (str) => {
+        let str1 = str.split('');
+        let xCount = 0;
+        let yCount = 0;
+        str1.map(char => {
+            if(char === 'x'){
+                xCount++;
+            }
+            if(char === 'o'){
+                yCount++;
+            }
+        });
+
+        return xCount === yCount;
+    }
+
+    document.write(exOhCount("xooxxxxooxo"));
+    document.write(exOhCount("x"));
+    document.write(exOhCount("o"));
+    document.write(exOhCount("oooxxoooxxxx"));
+
+
+</script>

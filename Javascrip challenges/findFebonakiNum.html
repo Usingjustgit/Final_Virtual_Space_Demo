@@ -1,0 +1,21 @@
+<script>
+
+function findFebonaciNumber(num){
+    let prev = [0];
+    for ( let i = 1; i<num+1; i){
+
+        var check = i + prev[0];
+
+        if(check === num){
+            return "YES";
+        }
+        console.log(prev);
+        prev.unshift(i);
+        i = check;
+    }
+    return "NO";
+}
+
+console.log(findFebonaciNumber(25));
+
+</script>

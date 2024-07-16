@@ -1,0 +1,40 @@
+<script>
+
+function checkArithOrGeo(arr){
+
+    if(arr.length === 1 || arr.length === 0){
+        return -1;
+    } 
+
+    let arithmatric = true;
+    let geometric = true;
+    let diff = arr[1] - arr[0];
+    let division = arr[1]/arr[0];
+    for(let i = 2; i < arr.length; i++){
+        if(arr[i] - arr[i-1] !== diff){
+            arithmatric = false;
+        }
+        if(arr[i]/arr[i-1] !== division){
+            geometric = false;
+        }
+    }
+    console.log(arithmatric,geometric);
+    if(arithmatric){
+        return "Arithmetric";
+    }else if(geometric){
+        return "Geometric";
+    }else{
+        return -1;
+    }
+}
+
+console.log(checkArithOrGeo([2,4,6,8]));
+console.log(checkArithOrGeo([2,6,18,54]));
+console.log(checkArithOrGeo([1,6,36,216,1296]));
+console.log(checkArithOrGeo([1,2,3,4,6]));
+console.log(checkArithOrGeo([1]));
+console.log(checkArithOrGeo([]));
+
+
+
+</script>

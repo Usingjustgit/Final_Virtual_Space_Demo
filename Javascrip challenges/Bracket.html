@@ -1,0 +1,27 @@
+<script>
+
+let str1 = "(())(";
+
+let result = [];
+
+function brackedMatcher(str1){
+    for(let i=0; i<str1.length; i++){
+        if(str1[i] === '('){
+            result.push(str1[i]);
+        }
+        if(str1[i] === ")"){
+            if(result.length === 0){
+                return 0;
+            }else{
+                result.pop();
+            }
+        }
+    }
+    return result.length === 0 ? 1 : 0;
+}
+
+
+console.log(brackedMatcher(str1));
+
+
+</script>

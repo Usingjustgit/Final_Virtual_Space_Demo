@@ -1,0 +1,27 @@
+<script>
+
+    function arrayAddition(arr){
+        let largest = 0;
+        for ( let i = 0; i < arr.length; i++){
+            if(arr[i] > largest){
+                largest = arr[i];
+            }
+        }
+
+        let index = arr.indexOf(largest);
+        arr.splice(index,1);
+
+        let sum = arr.reduce((pre,curr) => pre += curr , 0);
+
+        let combos = [];
+        let size = arr.length;
+        let max = Math.pow(2,size);
+
+        for( let i = 0; i < max; i++){
+
+        }
+
+
+    }
+
+</script>

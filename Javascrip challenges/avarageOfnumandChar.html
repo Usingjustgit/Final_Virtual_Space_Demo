@@ -1,0 +1,32 @@
+<script>
+
+    let str = "**********7777";
+
+    function checkAvg(str){
+        let total = 0;
+        let countChar = 0;
+
+        for(let i = 0; i < str.length; i++){
+
+            let char = str.charAt(i);
+
+            if(!isNaN(char) && char !== " "){
+                total += parseInt(char);
+            }
+            if(/[a-zA-Z]/.test(char)){
+                countChar++;
+            }
+        }
+        console.log(total);
+        console.log(countChar);
+        let average = total / countChar;
+
+        return Math.round(average);
+    }
+
+    console.log(checkAvg(str));
+
+
+
+
+</script>

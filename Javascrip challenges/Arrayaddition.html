@@ -1,0 +1,42 @@
+<script>
+
+    let array = [3,5,-1,11,12];
+
+    function ArrayAddition(arr){
+        let largest = Math.max(...arr);
+        console.log(largest);
+
+        let index = arr.indexOf(largest);
+        console.log(index);
+
+        console.log(arr.splice(index,1));
+        console.log(arr);
+
+        let sum = arr.reduce((pre, curr) => pre + curr, 0);
+
+        function checkSum(arr, target){
+            console.log(target);
+            if(arr.length === 0){
+                return false;
+            }
+            if(target === 0){
+                return true;
+            }
+
+            let remaining = arr.slice(1);
+            console.log(remaining); 
+            let current = arr[0];
+            console.log(current);
+
+            return checkSum(remaining, target) || checkSum(remaining, target - current);
+
+        }
+
+        return checkSum(arr, largest - sum) ? false : true ;
+    }
+
+    console.log(ArrayAddition(array));
+
+
+
+</script>

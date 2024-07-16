@@ -1,0 +1,55 @@
+<script>
+
+    // let firstCapital = (str) => {
+    //     let arr = str.split(' ');
+    //     let newArray = arr.map(word => word[0].toUpperCase()+word.substring(1));
+    //     return newArray.join(' ');
+    // }
+
+    // console.log(firstCapital("hello"));
+    // console.log(firstCapital("john"));
+    // console.log(firstCapital("the quick brown fox jumped."));
+    // console.log(firstCapital("the%$@ quick^! brown ! fox jumped"));
+
+    let isAlphaChar = (char) => {
+        let alphaBates = "abcdefghijklmnopqrstuvwxyz";
+        return char.split('').every(char => alphaBates.includes(char));
+    }
+
+    let isCapitalWolves = (str) => {
+
+        let wolves = "aeiou";
+        return str.split('').map(char => wolves.includes(char) ? char.toUpperCase() : char).join('');
+
+    }
+
+    let isUpperCase = (char) => char === char.toUpperCase();
+
+    let shiftAlphaCharcter = (char, key) => {
+
+        const charCode = char.charCodeAt(0);
+
+        const alphaBatesStart = isUpperCase(char) ? 'A'.charCodeAt(0) : 'a'.charCodeAt(0);
+
+        const distanceFormA = charCode - alphaBatesStart;   //3
+        const newDistanceFormA = (distanceFormA + key) % 26;  //4
+        const newCharCode = newDistanceFormA + alphaBatesStart; //4+65 = 69
+
+        return String.fromCharCode(newCharCode);
+
+    }
+
+    let latterChanges = (str) =>{
+
+
+        let newString = str.split('').map(char => isAlphaChar(char) ? shiftAlphaCharcter(char, 1) : char).join('');
+
+        return isCapitalWolves(newString);
+    }
+
+    console.log(latterChanges("zxz"));
+    console.log(latterChanges("abc"));
+
+
+
+</script>
