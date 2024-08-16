@@ -1,32 +1,32 @@
 ## 🌟 Skills
 
 ### Programming Languages
-- ![C](https://example.com/path-to-3d-c-icon.gif) **C**
-- ![HTML5](https://example.com/path-to-3d-html5-icon.gif) **HTML5**
-- ![CSS3](https://example.com/path-to-3d-css3-icon.gif) **CSS3**
-- ![JavaScript](https://example.com/path-to-3d-javascript-icon.gif) **JavaScript**
-- ![TypeScript](https://example.com/path-to-3d-typescript-icon.gif) **TypeScript**
+- ![C](https://img.icons8.com/ios/50/000000/c-plus-plus-logo.png) **C**
+- ![HTML5](https://img.icons8.com/ios/50/000000/html-5.png) **HTML5**
+- ![CSS3](https://img.icons8.com/ios/50/000000/css3.png) **CSS3**
+- ![JavaScript](https://img.icons8.com/ios/50/000000/javascript.png) **JavaScript**
+- ![TypeScript](https://img.icons8.com/ios/50/000000/typescript.png) **TypeScript**
 
 ### Frameworks/Libraries
-- ![React](https://example.com/path-to-3d-react-icon.gif) **React**
-- ![Next.js](https://example.com/path-to-3d-nextjs-icon.gif) **Next.js**
-- ![NestJS](https://example.com/path-to-3d-nestjs-icon.gif) **NestJS**
-- ![Electron](https://example.com/path-to-3d-electron-icon.gif) **Electron**
-- ![MERN](https://example.com/path-to-3d-mern-icon.gif) **MERN**
+- ![React](https://img.icons8.com/ios/50/000000/react.png) **React**
+- ![Next.js](https://img.icons8.com/ios/50/000000/nextjs.png) **Next.js**
+- ![NestJS](https://img.icons8.com/ios/50/000000/nestjs.png) **NestJS**
+- ![Electron](https://img.icons8.com/ios/50/000000/electron.png) **Electron**
+- ![MERN](https://img.icons8.com/ios/50/000000/mern.png) **MERN**
 
 ### Tools
-- ![VS Code](https://example.com/path-to-3d-vscode-icon.gif) **VS Code**
-- ![IntelliJ IDEA](https://example.com/path-to-3d-intellij-icon.gif) **IntelliJ IDEA**
-- ![Sublime Text](https://example.com/path-to-3d-sublime-text-icon.gif) **Sublime Text**
-- ![Ubuntu](https://example.com/path-to-3d-ubuntu-icon.gif) **Ubuntu**
-- ![Postman](https://example.com/path-to-3d-postman-icon.gif) **Postman**
-- ![Insomnia](https://example.com/path-to-3d-insomnia-icon.gif) **Insomnia**
-- ![Jira](https://example.com/path-to-3d-jira-icon.gif) **Jira**
-- ![Discord](https://example.com/path-to-3d-discord-icon.gif) **Discord**
+- ![VS Code](https://img.icons8.com/ios/50/000000/visual-studio-code.png) **VS Code**
+- ![IntelliJ IDEA](https://img.icons8.com/ios/50/000000/intellij-idea.png) **IntelliJ IDEA**
+- ![Sublime Text](https://img.icons8.com/ios/50/000000/sublime-text.png) **Sublime Text**
+- ![Ubuntu](https://img.icons8.com/ios/50/000000/ubuntu.png) **Ubuntu**
+- ![Postman](https://img.icons8.com/ios/50/000000/postman-api.png) **Postman**
+- ![Insomnia](https://img.icons8.com/ios/50/000000/insomnia.png) **Insomnia**
+- ![Jira](https://img.icons8.com/ios/50/000000/jira.png) **Jira**
+- ![Discord](https://img.icons8.com/ios/50/000000/discord.png) **Discord**
 
 ### Databases
-- ![MySQL](https://example.com/path-to-3d-mysql-icon.gif) **MySQL**
-- ![Mongoose](https://example.com/path-to-3d-mongoose-icon.gif) **Mongoose**
+- ![MySQL](https://img.icons8.com/ios/50/000000/mysql-logo.png) **MySQL**
+- ![Mongoose](https://img.icons8.com/ios/50/000000/mongoose.png) **Mongoose**
 
 ### Concepts
-- ![OOP](https://example.com/path-to-3d-oop-icon.gif) **OOP**
+- ![OOP](https://img.icons8.com/ios/50/000000/oop.png) **OOP**
