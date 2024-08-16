@@ -26,8 +26,8 @@
 
 ### Databases
 - ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white) **MySQL**
-- ![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=flat&logo=mongoose&logoColor=white) **Mongoose**
+- ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white) **MongoDB**
 
 ### Concepts
 - ![OOP](https://img.shields.io/badge/OOP-000000?style=flat&logo=object-oriented-programming&logoColor=white) **OOP**
-
+- ![Data Structures](https://img.shields.io/badge/Data_Structures-000000?style=flat&logo=data-structures&logoColor=white) **Data Structures**
