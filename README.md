@@ -1,32 +1,33 @@
 ## 🌟 Skills
 
 ### Programming Languages
-- ![C](https://img.icons8.com/ios/50/000000/c-plus-plus-logo.png) **C**
-- ![HTML5](https://img.icons8.com/ios/50/000000/html-5.png) **HTML5**
-- ![CSS3](https://img.icons8.com/ios/50/000000/css3.png) **CSS3**
-- ![JavaScript](https://img.icons8.com/ios/50/000000/javascript.png) **JavaScript**
-- ![TypeScript](https://img.icons8.com/ios/50/000000/typescript.png) **TypeScript**
+- ![C](https://img.shields.io/badge/C-000000?style=flat&logo=c&logoColor=white) **C**
+- ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white) **HTML5**
+- ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white) **CSS3**
+- ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) **JavaScript**
+- ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white) **TypeScript**
 
 ### Frameworks/Libraries
-- ![React](https://img.icons8.com/ios/50/000000/react.png) **React**
-- ![Next.js](https://img.icons8.com/ios/50/000000/nextjs.png) **Next.js**
-- ![NestJS](https://img.icons8.com/ios/50/000000/nestjs.png) **NestJS**
-- ![Electron](https://img.icons8.com/ios/50/000000/electron.png) **Electron**
-- ![MERN](https://img.icons8.com/ios/50/000000/mern.png) **MERN**
+- ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black) **React**
+- ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white) **Next.js**
+- ![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat&logo=nestjs&logoColor=white) **NestJS**
+- ![Electron](https://img.shields.io/badge/Electron-47848F?style=flat&logo=electron&logoColor=white) **Electron**
+- ![MERN](https://img.shields.io/badge/MERN-000000?style=flat&logo=mongodb&logoColor=white) **MERN**
 
 ### Tools
-- ![VS Code](https://img.icons8.com/ios/50/000000/visual-studio-code.png) **VS Code**
-- ![IntelliJ IDEA](https://img.icons8.com/ios/50/000000/intellij-idea.png) **IntelliJ IDEA**
-- ![Sublime Text](https://img.icons8.com/ios/50/000000/sublime-text.png) **Sublime Text**
-- ![Ubuntu](https://img.icons8.com/ios/50/000000/ubuntu.png) **Ubuntu**
-- ![Postman](https://img.icons8.com/ios/50/000000/postman-api.png) **Postman**
-- ![Insomnia](https://img.icons8.com/ios/50/000000/insomnia.png) **Insomnia**
-- ![Jira](https://img.icons8.com/ios/50/000000/jira.png) **Jira**
-- ![Discord](https://img.icons8.com/ios/50/000000/discord.png) **Discord**
+- ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat&logo=visual-studio-code&logoColor=white) **VS Code**
+- ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000?style=flat&logo=intellij-idea&logoColor=white) **IntelliJ IDEA**
+- ![Sublime Text](https://img.shields.io/badge/Sublime_Text-FF9800?style=flat&logo=sublime-text&logoColor=white) **Sublime Text**
+- ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white) **Ubuntu**
+- ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white) **Postman**
+- ![Insomnia](https://img.shields.io/badge/Insomnia-4000BF?style=flat&logo=insomnia&logoColor=white) **Insomnia**
+- ![Jira](https://img.shields.io/badge/Jira-0052CC?style=flat&logo=jira&logoColor=white) **Jira**
+- ![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&logoColor=white) **Discord**
 
 ### Databases
-- ![MySQL](https://img.icons8.com/ios/50/000000/mysql-logo.png) **MySQL**
-- ![Mongoose](https://img.icons8.com/ios/50/000000/mongoose.png) **Mongoose**
+- ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white) **MySQL**
+- ![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=flat&logo=mongoose&logoColor=white) **Mongoose**
 
 ### Concepts
-- ![OOP](https://img.icons8.com/ios/50/000000/oop.png) **OOP**
+- ![OOP](https://img.shields.io/badge/OOP-000000?style=flat&logo=object-oriented-programming&logoColor=white) **OOP**
+
